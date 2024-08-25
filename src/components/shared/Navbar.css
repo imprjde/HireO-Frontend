@@ -1,0 +1,32 @@
+.underline-rounded {
+  position: relative; /* Ensure the pseudo-element is positioned relative to its container */
+}
+
+.underline-rounded::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 4px; /* Thickness of the underline */
+  background: linear-gradient(
+    to left,
+    #d0caca,
+    #a202ff
+  ); /* Gradient with three colors */
+  border-radius: 9999px; /* Fully rounded corners */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.text-gradient {
+  background: linear-gradient(
+    to left,
+    #d0caca,
+    #a202ff
+  ); /* Gradient colors */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bolder;
+  background-clip: text;
+  color: transparent; /* Fallback for browsers that do not support gradient text */
+}
