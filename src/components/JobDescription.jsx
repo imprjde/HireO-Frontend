@@ -447,6 +447,7 @@ const JobDescription = () => {
     } else {
       setIsApplying(true);
       try {
+        axios.defaults.withCredentials = true;
         const res = await axios.post(
           `${import.meta.env.VITE_BASE_URL}/application/apply/${params.id}`,
           {
