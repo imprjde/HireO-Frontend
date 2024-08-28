@@ -447,8 +447,6 @@ const JobDescription = () => {
     } else {
       setIsApplying(true);
       try {
-        axios.defaults.withCredentials = true;
-
         // I chnaged this to post method which has Get method initially if you face any bug
         // then revet this to Get method and alos chnage the route to Get method in the backend
         const res = await axios.post(
