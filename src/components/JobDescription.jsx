@@ -449,6 +449,7 @@ const JobDescription = () => {
       try {
         axios.defaults.withCredentials = true;
         const res = await axios.post(
+          // `${import.meta.env.VITE_BASE_URL}/application/apply/${params.id}`,
           `${import.meta.env.VITE_BASE_URL}/application/apply/${params.id}`,
           {
             fullname: authUser?.fullname,
