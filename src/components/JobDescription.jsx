@@ -447,17 +447,15 @@ const JobDescription = () => {
     } else {
       setIsApplying(true);
       try {
-        // I chnaged this to post method which has Get method initially if you face any bug
-        // then revet this to Get method and alos chnage the route to Get method in the backend
         const res = await axios.post(
-          // `http://localhost:8000/api/v1/application/apply/${params.id}`,
           `${import.meta.env.VITE_BASE_URL}/application/apply/${params.id}`,
           {
             fullname: authUser?.fullname,
             created_By: singleJobById?.created_by,
             jobId: singleJobById?._id,
             companyId: singleJobById?.company?._id,
-          }
+          },
+          { withCredentials: true }
         );
         if (res.data.success) {
           setIsApplied(true);
