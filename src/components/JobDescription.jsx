@@ -452,7 +452,8 @@ const JobDescription = () => {
         // I chnaged this to post method which has Get method initially if you face any bug
         // then revet this to Get method and alos chnage the route to Get method in the backend
         const res = await axios.post(
-          `http://localhost:8000/api/v1/application/apply/${params.id}`,
+          // `http://localhost:8000/api/v1/application/apply/${params.id}`,
+          `${import.meta.env.VITE_BASE_URL}/application/apply/${params.id}`,
           {
             fullname: authUser?.fullname,
             created_By: singleJobById?.created_by,
@@ -487,7 +488,8 @@ const JobDescription = () => {
         setIsLoading(true);
         axios.defaults.withCredentials = true;
         const res = await axios.get(
-          `http://localhost:8000/api/v1/job/getjob/${params.id}`
+          // `http://localhost:8000/api/v1/job/getjob/${params.id}`
+          `${import.meta.env.VITE_BASE_URL}/job/getjob/${params.id}`
         );
         if (res.data.success) {
           dispatch(setSingleJobById(res.data.job));
@@ -534,7 +536,10 @@ const JobDescription = () => {
 
       // Save the job on the server
       await axios.post(
-        `http://localhost:8000/api/v1/saved/saveJob?jobId=${singleJobById?._id}&created_by=${authUser?._id}`
+        // `http://localhost:8000/api/v1/saved/saveJob?jobId=${singleJobById?._id}&created_by=${authUser?._id}`
+        `${import.meta.env.VITE_BASE_URL}/saved/saveJob?jobId=${
+          singleJobById?._id
+        }&created_by=${authUser?._id}`
       );
 
       // Update state and notify the user

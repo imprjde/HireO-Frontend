@@ -11,7 +11,8 @@ const useFilterJobs = (query) => {
       setLoading(true);
       try {
         const res = await axios.get(
-          `http://localhost:8000/api/v1/job/filterJobs`,
+          // `http://localhost:8000/api/v1/job/filterJobs`,
+          `${import.meta.env.VITE_BASE_URL}/job/filterJobs`,
           {
             params: { query },
           }

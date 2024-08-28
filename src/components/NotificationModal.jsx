@@ -30,7 +30,8 @@ export default function NotificationModal({
       try {
         dispatch(setIsFetchingNotifications(true));
         let resp = await axios.get(
-          `http://localhost:8000/api/v1/notification/get-notification`,
+          // `http://localhost:8000/api/v1/notification/get-notification`,
+          `${import.meta.env.VITE_BASE_URL}/notification/get-notification`,
           {
             params: { userId: authUser?._id },
           }
@@ -60,7 +61,8 @@ export default function NotificationModal({
       const updateNotifications = async () => {
         try {
           await axios.put(
-            `http://localhost:8000/api/v1/notification/update-notification`,
+            // `http://localhost:8000/api/v1/notification/update-notification`,
+            `${import.meta.env.VITE_BASE_URL}/notification/update-notification`,
             {
               userId: authUser?._id,
             }

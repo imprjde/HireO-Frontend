@@ -366,7 +366,8 @@ export function UpdateProfileDialog({ open, setOpen }) {
       setIsLoading(true);
       dispatch(setLoading(true));
       const res = await axios.post(
-        "http://localhost:8000/api/v1/user/profile/update",
+        // "http://localhost:8000/api/v1/user/profile/update",
+        `${import.meta.env.VITE_BASE_URL}/user/profile/update`,
         formData,
         {
           headers: {

@@ -17,7 +17,8 @@ export default function ForgotPassword() {
     try {
       setIsLoading(true);
       let resp = await axios.post(
-        "http://localhost:8000/api/v1/user/get-link",
+        // "http://localhost:8000/api/v1/user/get-link",
+        `${import.meta.env.VITE_BASE_URL}/user/get-link`,
         {
           email,
         }

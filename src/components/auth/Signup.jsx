@@ -326,7 +326,8 @@ const Signup = () => {
       setShowPassword(false);
       dispatch(setLoading(true));
       const res = await axios.post(
-        "http://localhost:8000/api/v1/user/register",
+        // "http://localhost:8000/api/v1/user/register",
+        `${import.meta.env.VITE_BASE_URL}/user/register`,
         formData,
         {
           headers: {

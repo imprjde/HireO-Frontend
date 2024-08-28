@@ -18,7 +18,10 @@ const useGetCompanies = (shouldSkip) => {
         axios.defaults.withCredentials = true;
 
         const res = await axios.get(
-          `http://localhost:8000/api/v1/company/getcompany?page=${page}&shouldSkip=${shouldSkip}`
+          // `http://localhost:8000/api/v1/company/getcompany?page=${page}&shouldSkip=${shouldSkip}`
+          `${
+            import.meta.env.VITE_BASE_URL
+          }/company/getcompany?page=${page}&shouldSkip=${shouldSkip}`
         );
         console.log("RES.DATA", res.data);
         dispatch(setCompanies(res.data.companies));

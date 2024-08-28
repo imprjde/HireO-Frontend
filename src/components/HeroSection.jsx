@@ -26,7 +26,8 @@ const HeroSection = ({ setProgress }) => {
         dispatch(setSearchText(query));
         dispatch(setIsSearching(true));
         let res = await axios.get(
-          `http://localhost:8000/api/v1/job/searchJob?query=${query}`
+          // `http://localhost:8000/api/v1/job/searchJob?query=${query}`
+          `${import.meta.env.VITE_BASE_URL}/job/searchJob?query=${query}`
         );
 
         // console.log("Search Response", res.data.filteredData);

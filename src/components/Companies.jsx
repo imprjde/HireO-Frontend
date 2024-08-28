@@ -28,7 +28,8 @@ const Companies = () => {
       console.log("FETCH NOTIFICATION FUNCTION RUNNING");
       try {
         let resp = await axios.get(
-          `http://localhost:8000/api/v1/notification/get-notification-count`,
+          // `http://localhost:8000/api/v1/notification/get-notification-count`,
+          `${import.meta.env.VITE_BASE_URL}/notification/get-notification-count`,
           {
             params: { userId: authUser?._id },
           }

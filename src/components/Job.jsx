@@ -186,7 +186,10 @@ const Job = ({ job }) => {
     try {
       setIsLoading(true);
       await axios.post(
-        `http://localhost:8000/api/v1/saved/saveJob?jobId=${jobId}&created_by=${authUser?._id}`
+        // `http://localhost:8000/api/v1/saved/saveJob?jobId=${jobId}&created_by=${authUser?._id}`
+        `${
+          import.meta.env.VITE_BASE_URL
+        }/saved/saveJob?jobId=${jobId}&created_by=${authUser?._id}`
       );
       setIsLoading(false);
       toast.success("Job Saved Successfully");

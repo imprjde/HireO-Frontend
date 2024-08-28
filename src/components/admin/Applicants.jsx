@@ -90,7 +90,7 @@ const Applicants = () => {
         dispatch(setIsFetchingApplicants(true));
         axios.defaults.withCredentials = true;
         const res = await axios.get(
-          `http://localhost:8000/api/v1/application/${id}/applicants`
+          `${import.meta.env.VITE_BASE_URL}/application/${id}/applicants`
         );
         if (res.data.success) {
           dispatch(setAllApplicants(res.data.job));

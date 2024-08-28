@@ -356,7 +356,9 @@ const ApplicantsTable = () => {
       setModal(false);
       setIsStatusUpdating(true);
       const res = await axios.post(
-        `http://localhost:8000/api/v1/application/status/${object?.id}/update`,
+        `${import.meta.env.VITE_BASE_URL}/application/status/${
+          object?.id
+        }/update`,
         object,
         {
           withCredentials: true,

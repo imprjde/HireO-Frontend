@@ -34,7 +34,8 @@
 
 //       console.log("The Generated Token :", token);
 //       const resp = await axios.post(
-//         "http://localhost:8000/api/v1/pushNotification/postToken",
+// "http://localhost:8000/api/v1/pushNotification/postToken",
+// `${import.meta.env.VITE_BASE_URL}/pushNotification/postToken`,
 //         {
 //           userId,
 //           token, // Consider generating this dynamically

@@ -17,7 +17,10 @@ export default function CarouselItem({ category, setProgress }) {
       dispatch(setSearchText(category));
       dispatch(setIsSearching(true));
       let res = await axios.get(
-        `http://localhost:8000/api/v1/job/searchJob?carouselQuery=${category}`
+        // `http://localhost:8000/api/v1/job/searchJob?carouselQuery=${category}`
+        `${
+          import.meta.env.VITE_BASE_URL
+        }/job/searchJob?carouselQuery=${category}`
       );
 
       // console.log(res.data.jobs);

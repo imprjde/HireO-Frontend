@@ -337,7 +337,8 @@ const EditJob = () => {
     try {
       setIsLoading(true);
       let res = await axios.put(
-        `http://localhost:8000/api/v1/job/updateJob/${jobEditData?._id}`,
+        // `http://localhost:8000/api/v1/job/updateJob/${jobEditData?._id}`,
+        `${import.meta.env.VITE_BASE_URL}/job/updateJob/${jobEditData?._id}`,
         formData
       );
       setIsLoading(false);

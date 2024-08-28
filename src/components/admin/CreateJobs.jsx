@@ -56,7 +56,8 @@ const CreateJobs = () => {
       setIsLoading(true);
       dispatch(setLoading(true));
       const res = await axios.post(
-        `http://localhost:8000/api/v1/job/postjob`,
+        // `http://localhost:8000/api/v1/job/postjob`,
+        `${import.meta.env.VITE_BASE_URL}/job/postjob`,
         input,
         {
           headers: {

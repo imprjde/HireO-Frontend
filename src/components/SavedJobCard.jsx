@@ -23,7 +23,8 @@ export default function SavedJobCard({ job, setIsRemoving }) {
     try {
       setIsRemoving(true);
       await axios.delete(
-        `http://localhost:8000/api/v1/saved/removeSaved?Id=${Id}`
+        // `http://localhost:8000/api/v1/saved/removeSaved?Id=${Id}`
+        `${import.meta.env.VITE_BASE_URL}/saved/removeSaved?Id=${Id}`
       );
       dispatch(setRemoveJobLocally(Id));
       setIsRemoving(false);

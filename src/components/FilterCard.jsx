@@ -300,7 +300,8 @@ const FilterCard = ({
         salary: filterObject.salary,
       }).toString();
       const res = await axios.get(
-        `http://localhost:8000/api/v1/job/filterJobs?${query}`
+        // `http://localhost:8000/api/v1/job/filterJobs?${query}`
+        `${import.meta.env.VITE_BASE_URL}/job/filterJobs?${query}`
       );
       setJobs(res.data.jobs);
       setIsLoading(false);
