@@ -365,6 +365,7 @@ export function UpdateProfileDialog({ open, setOpen }) {
     try {
       setIsLoading(true);
       dispatch(setLoading(true));
+      axios.defaults.withCredentials = true;
       const res = await axios.post(
         // "http://localhost:8000/api/v1/user/profile/update",
         `${import.meta.env.VITE_BASE_URL}/user/profile/update`,
@@ -373,7 +374,6 @@ export function UpdateProfileDialog({ open, setOpen }) {
           headers: {
             "Content-Type": "multipart/form-data",
           },
-          withCredentials: true,
         }
       );
       if (res.data.success) {
