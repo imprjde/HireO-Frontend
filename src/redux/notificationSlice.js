@@ -7,6 +7,7 @@ const notificationSlice = createSlice({
     unseenNotificationCount: 0,
     isFetchingNotifications: false,
     notificationDetails: null,
+    isRotated: false,
   },
   reducers: {
     setAllNotifications: (state, action) => {
@@ -22,6 +23,9 @@ const notificationSlice = createSlice({
       console.log("setNotificationDetails SLICEE=", action.payload);
       state.notificationDetails = action.payload;
     },
+    setIsRotated: (state, action) => {
+      state.isRotated = action.payload;
+    },
   },
 });
 export const {
@@ -29,6 +33,7 @@ export const {
   setUnseenNotificationCount,
   setIsFetchingNotifications,
   setNotificationDetails,
+  setIsRotated,
 } = notificationSlice.actions;
 
 export default notificationSlice.reducer;

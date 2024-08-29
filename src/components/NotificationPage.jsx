@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setAllNotifications,
   setIsFetchingNotifications,
+  setIsRotated,
   setUnseenNotificationCount,
 } from "@/redux/notificationSlice";
 import NotificationsLoader from "./loaders/NotificationsLoader";
@@ -19,7 +20,7 @@ function NotificationPage() {
 
   useEffect(() => {
     const fetchNotifications = async () => {
-      console.log("FETCH NOTIFICATION FUNCTION RUNNING");
+      dispatch(setIsRotated(true));
       try {
         dispatch(setIsFetchingNotifications(true));
         let resp = await axios.get(
@@ -51,6 +52,7 @@ function NotificationPage() {
 
     // Below Fuction Updates the hasSeen filed of notification on the databse while user leaves this page
     return () => {
+      dispatch(setIsRotated(false));
       const updateNotifications = async () => {
         try {
           await axios.put(

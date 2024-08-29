@@ -159,13 +159,11 @@ import { setUnseenNotificationCount } from "@/redux/notificationSlice";
 
 export default function BottomNav() {
   const { authUser } = useSelector((store) => store.auth);
+  const { isRotated } = useSelector((store) => store.notification);
   const { unseenNotificationCount } = useSelector(
     (store) => store.notification
   );
-  // console.log("NOTI COUNT=", unseenNotificationCount);
   const dispatch = useDispatch();
-  // const location = useLocation();
-  // const isActive = location.pathname === "/profile";
 
   useEffect(() => {
     const fetchNotifications = async () => {
@@ -193,6 +191,7 @@ export default function BottomNav() {
       fetchNotifications();
     }
   }, [authUser?._id, dispatch]);
+
   return (
     <div className="z-40 md:hidden bg-black fixed bottom-0 w-full">
       <div>
@@ -231,7 +230,12 @@ export default function BottomNav() {
               } just flex flex-1 flex-col items-center relative justify-end rounded-full text-[#FFFFFF`
             }
           >
-            <IoIosNotifications size={23} />
+            <IoIosNotifications
+              size={23}
+              className={`${
+                isRotated ? "rotate-[15deg]" : "rotate-[0deg]"
+              } transition-transform duration-300`}
+            />
             {unseenNotificationCount > 0 && (
               <span className="absolute top-[-5px] right-[16px] w-4 h-4 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
                 {unseenNotificationCount && unseenNotificationCount}
