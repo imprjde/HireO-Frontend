@@ -183,8 +183,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import { motion } from "framer-motion";
-import { messaging } from "./firebase/firebase";
-import { getToken } from "firebase/messaging";
+// import { messaging } from "./firebase/firebase";
+// import { getToken } from "firebase/messaging";
 import Jobs from "./components/Jobs";
 import Home from "./components/Home";
 import JobDescription from "./components/JobDescription";
@@ -204,11 +204,11 @@ import EditJob from "./components/EditJob";
 import ForgotPassword from "./components/ForgotPassword";
 import Notification from "./components/NotificationPage";
 import ViewNotification from "./components/ViewNotification";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import Animation from "./components/animation/Animation";
+// import { useEffect } from "react";
+// import { useSelector } from "react-redux";
+// import Animation from "./components/animation/Animation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { reqNotifyPermission } from "./helpers/reqNotifyPermission";
+// import { reqNotifyPermission } from "./helpers/reqNotifyPermission";
 
 const appRouter = createBrowserRouter([
   {
@@ -317,7 +317,7 @@ const appRouter = createBrowserRouter([
 ]);
 
 function App() {
-  const { authUser } = useSelector((store) => store.auth);
+  // const { authUser } = useSelector((store) => store.auth);
 
   // useEffect(() => {
   //   const requestNotificationPermission = async () => {
