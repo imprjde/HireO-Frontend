@@ -61,7 +61,7 @@ const Jobs = () => {
                 transition={{ duration: 0.5, type: "spring", stiffness: 200 }}
                 className="fixed bottom-[72px] md:hidden right-4 z-40"
               >
-                <button className="flex border-[1.5px]   border-gray-600 space-x-1 items-center bg-gradient-to-r from-purple-700 to-gray-900 hover:from-gray-900 hover:to-purple-700 text-white font-semibold text-sm py-1.5 px-4 rounded-full ">
+                <button className="flex border-[1.5px]    border-gray-600 space-x-1 items-center bg-gradient-to-r from-purple-700 to-gray-900 hover:from-gray-900 hover:to-purple-700 text-white font-semibold text-sm py-1.5 px-4 rounded-full ">
                   <span>Filters</span>
                   <span>
                     {" "}
@@ -111,7 +111,7 @@ const Jobs = () => {
           {!isLoading && jobs?.length === 0 ? (
             <Jobnotfound />
           ) : (
-            <div className="flex-1 mt-12 mb-16 md:mt-0 h-[88vh] overflow-y-auto overflow-x-hidden no-scrollbar pb-5">
+            <div className="flex-1 mt-12 mb-16 md:mt-0 h-[88vh]  overflow-y-auto overflow-x-hidden no-scrollbar pb-5">
               <div className="mx-3 grid md:grid-cols-3 gap-4">
                 {!isLoading &&
                   jobs &&
