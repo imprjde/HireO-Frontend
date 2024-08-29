@@ -147,7 +147,7 @@
 
 // export default Jobs;
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 import { useEffect, useState } from "react";
 import Job from "./Job";
@@ -257,9 +257,11 @@ const Jobs = () => {
             )}
           </AnimatePresence>
 
-          {isLoading && <FilterLoader />}
+          {/* {isLoading && */}
+          <FilterLoader />
+          {/* } */}
 
-          {!isLoading && jobs?.length === 0 ? (
+          {/* {!isLoading && jobs?.length === 0 ? (
             <Jobnotfound />
           ) : (
             <div className="flex-1 mt-12 mb-16 md:mt-0 h-[88vh]  overflow-y-auto overflow-x-hidden no-scrollbar pb-5">
@@ -279,7 +281,7 @@ const Jobs = () => {
                   ))}
               </div>
             </div>
-          )}
+          )} */}
         </div>
       </div>
 
