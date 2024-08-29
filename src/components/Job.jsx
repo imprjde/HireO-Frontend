@@ -180,7 +180,7 @@ const Job = ({ job }) => {
     }
     dispatch(setSaveJobLocally(job));
     if (savedJobs.some((savedJob) => savedJob?._id === job?._id)) {
-      toast("This job has already been saved.");
+      toast.info("This job has already been saved.");
       return;
     }
     try {
