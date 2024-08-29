@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import { Search } from "lucide-react";
 import { useDispatch } from "react-redux";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import {
   setIsSearching,
   setSearchedJobs,
@@ -49,7 +49,7 @@ const HeroSection = ({ setProgress }) => {
   return (
     <div className="text-center ">
       <div className="flex flex-col gap-5 my-10">
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: -200 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
@@ -63,19 +63,19 @@ const HeroSection = ({ setProgress }) => {
           <div className="text-orange-600 px-4 py-2 rounded-full bg-gray-100 font-medium">
             No. 1 Job Hunt Website
           </div>
-        </motion.div>
+        </motion.div> */}
         <div>
           <h1 className="text-3xl md:text-5xl justify-start font-bold text-white">
             Discover, Apply & <br /> Land Your{" "}
             <span className="text-[#6A38C2]">Dream Job</span>
           </h1>
         </div>
-        <div className="md:w-fit w-[90%] m-auto">
+        {/* <div className="md:w-fit w-[90%] m-auto">
           <p className="text-white font-medium text-sm leading-5 px-5 md:px-0 text-justify">
             Unlock Your Career Potential—Find and Apply for Jobs That Fit Your
             Skills and Goals.
           </p>
-        </div>
+        </div> */}
         <form onSubmit={handleSearch}>
           <div className="flex shadow-md shadow-purple-600  w-[80%] md:w-[40%]  bg-blend-normal border-[0.5px] border-gray-700  bg-black  pl-3 border-x-0 border-t-gray-800 rounded-full items-center gap-4 mx-auto">
             <input
