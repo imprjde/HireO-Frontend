@@ -336,11 +336,11 @@ function App() {
   //   requestNotificationPermission();
   // }, []);
 
-  useEffect(() => {
-    if (authUser && authUser?._id) {
-      reqNotifyPermission(authUser?._id);
-    }
-  }, [authUser]);
+  // useEffect(() => {
+  //   if (authUser && authUser?._id) {
+  //     reqNotifyPermission(authUser?._id);
+  //   }
+  // }, [authUser]);
 
   const queryClient = new QueryClient();
   return (
