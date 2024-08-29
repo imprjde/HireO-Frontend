@@ -15,6 +15,8 @@
 //   );
 //   // console.log("NOTI COUNT=", unseenNotificationCount);
 //   const dispatch = useDispatch();
+//   // const location = useLocation();
+//   // const isActive = location.pathname === "/profile";
 
 //   useEffect(() => {
 //     const fetchNotifications = async () => {
@@ -22,7 +24,9 @@
 //       try {
 //         let resp = await axios.get(
 //           // `http://localhost:8000/api/v1/notification/get-notification-count`,
-//           `${import.meta.env.VITE_BASE_URL}/notification/get-notification-count`,
+//           `${
+//             import.meta.env.VITE_BASE_URL
+//           }/notification/get-notification-count`,
 //           {
 //             params: { userId: authUser?._id },
 //           }
@@ -105,28 +109,35 @@
 //             to="/profile"
 //             className={({ isActive }) =>
 //               `${
-//                 isActive
-//                   ? "text-purple-600 b font-bold"
-//                   : "text-white"
-//               } just flex flex-1 flex-col items-center justify-end rounded-full text-[#FFFFFF`
+//                 isActive ? "text-purple-600 font-bold" : "text-white"
+//               } flex flex-1 flex-col items-center justify-end rounded-full`
 //             }
 //           >
-//             {authUser?.profile?.profilePhoto ? (
-//               <img
-//                 className="w-6 h-6 border-purple-600  border-2 rounded-full object-fit"
-//                 src={authUser?.profile?.profilePhoto}
-//                 alt="Profile Picture"
-//               />
-//             ) : (
-//               <img
-//                 className="w-6 h-6 border-2 border-purple-400 rounded-full object-cover"
-//                 src="src/assets/default.jpg"
-//               />
-//             )}
+//             {({ isActive }) => (
+//               <>
+//                 {authUser?.profile?.profilePhoto ? (
+//                   <img
+//                     className={`w-6 h-6 border-2 rounded-full object-cover ${
+//                       isActive ? "border-purple-600" : "border-white"
+//                     }`}
+//                     src={authUser?.profile?.profilePhoto}
+//                     alt="Profile Picture"
+//                   />
+//                 ) : (
+//                   <img
+//                     className={`w-6 h-6 border-2 rounded-full object-cover ${
+//                       isActive ? "border-purple-600" : "border-purple-400"
+//                     }`}
+//                     src="src/assets/default.jpg"
+//                     alt="Default Profile Picture"
+//                   />
+//                 )}
 
-//             <p className=" text-xs font-medium leading-normal tracking-[0.015em]">
-//               Profile
-//             </p>
+//                 <p className="text-xs font-medium leading-normal tracking-[0.015em]">
+//                   Profile
+//                 </p>
+//               </>
+//             )}
 //           </NavLink>
 //         </div>
 //       </div>
@@ -134,7 +145,7 @@
 //   );
 // }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 import { GoHomeFill } from "react-icons/go";
 import { NavLink } from "react-router-dom";

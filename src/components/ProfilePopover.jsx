@@ -43,7 +43,7 @@ export function ProfilePopover({ setShowModal }) {
               <h4 className="font-medium leading-none">{authUser?.fullname}</h4>
               {authUser && authUser?.role === "student" && (
                 <p className="text-sm text-white text-muted-foreground">
-                  {authUser?.profile.bio.slice(0, 63)} ...
+                  {authUser?.profile?.bio?.slice(0, 63)} ...
                 </p>
               )}
               {authUser && authUser?.role === "recruiter" && (
