@@ -138,10 +138,10 @@ function NotificationPage() {
   }, [authUser?._id, dispatch, navigate]);
   return (
     <div className="bg- text-white min-h-screen py-4 bg-red-5 px2 bg-red-">
-      <div className="text-xl font-bold my-4 pl-4">Notifications</div>
+      {authUser?._id && (
+        <div className="text-xl font-bold my-4 pl-4">Notifications</div>
+      )}
       <div className="mb-16">
-        {/* Map All Notification Below Here */}
-
         {isFetchingNotifications && <NotificationsLoader />}
 
         {!isFetchingNotifications &&

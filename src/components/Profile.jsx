@@ -19,13 +19,12 @@ const Profile = () => {
   const [open, setOpen] = useState(false);
   const { authUser } = useSelector((store) => store.auth);
 
-  console.log("auth user", authUser);
   const navigate = useNavigate();
   // protect route
   useEffect(() => {
-    if (!authUser) {
+    if (!authUser) { 
       navigate("/login", { replace: true });
-      toast.warning("Login to view your Profile");
+      toast.warning("Please Login to view your Profile");
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -38,10 +38,10 @@ export default function BottomNav() {
       }
     };
 
-    if (authUser?._id) {
+    if (authUser) {
       fetchNotifications();
     }
-  }, [authUser?._id, dispatch]);
+  }, [authUser, dispatch]);
 
   return (
     <div className="z-40 md:hidden bg-black fixed bottom-0 w-full">
