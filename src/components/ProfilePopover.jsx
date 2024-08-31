@@ -34,7 +34,7 @@ export function ProfilePopover({ setShowModal }) {
         <div className="grid gap-4">
           <div className=" flex  gap-2 space-y-">
             <Avatar className="cursor-pointer">
-              <AvatarImage 
+              <AvatarImage
                 src={authUser?.profile?.profilePhoto || defaultProfilePic}
                 alt="profile photo"
               />

@@ -283,6 +283,7 @@ import { setLoading } from "@/redux/authSlice";
 import { Loader2 } from "lucide-react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import HireOLogo from "../../../src/assets/HireO.svg";
+import Default from "../../../src/assets/default.jpg";
 
 const Signup = () => {
   const [input, setInput] = useState({
@@ -366,11 +367,7 @@ const Signup = () => {
         >
           <Link to="/">
             <h1 className="font-bold text-xl mb-4 w-full flex m-auto justify-center text-center ">
-              <img
-                // src="src/assets/HireO.svg"
-                src={HireOLogo}
-                className="w-[170px] md:w-[200px]"
-              />
+              <img src={HireOLogo} className="w-[170px] md:w-[200px]" />
             </h1>{" "}
           </Link>
           <div className="my-4 relative w-full flex m-auto justify-center mx-auto">
@@ -411,7 +408,7 @@ const Signup = () => {
                       {" "}
                       <img
                         className="w-[105px] h-[105px] rounded-full"
-                        src="src/assets/default.jpg"
+                        src={Default}
                         alt="Upload Icon"
                       />
                     </span>{" "}
@@ -429,7 +426,7 @@ const Signup = () => {
               value={input.fullname}
               name="fullname"
               onChange={changeEventHandler}
-              placeholder="Full Namekks"
+              placeholder="Full Name"
               className="bg-zinc-700 text-sm md:text-md w-full placeholder:tracking-wide placeholder:text-gray-300 rounded-sm h-[44px] outline-none border-none pl-3 pr-10"
             />
           </div>

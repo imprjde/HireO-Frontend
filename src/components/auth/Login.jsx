@@ -70,11 +70,7 @@ const Login = () => {
           <Link to="/">
             {" "}
             <h1 className="font-bold text-xl mb-4 b w-full flex m-auto justify-center text-center ">
-              <img
-                // src="src/assets/HireO.svg"
-                src={HireOLogo}
-                className="w-[170px] md:w-[200px]"
-              />
+              <img src={HireOLogo} className="w-[170px] md:w-[200px]" />
             </h1>
           </Link>
 
@@ -84,7 +80,7 @@ const Login = () => {
               name="email"
               value={input.email}
               onChange={changeEventHandler}
-              placeholder="Example@gmail.comask"
+              placeholder="yourname@gmail.com"
               className="bg-zinc-700 text-sm md:text-md  w-full placeholder:tracking-wide placeholder:text-gray-300 rounded-sm h-[44px] outline-none border-none pl-3 pr-10"
             />
           </div>

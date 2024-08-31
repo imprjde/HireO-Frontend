@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import axios from "axios";
 import { setUnseenNotificationCount } from "@/redux/notificationSlice";
+import Default from "../../../src/assets/default.jpg";
 
 export default function BottomNav() {
   const { authUser } = useSelector((store) => store.auth);
@@ -131,7 +132,7 @@ export default function BottomNav() {
                     className={`w-6 h-6 border-2 rounded-full object-cover ${
                       isActive ? "border-purple-600" : "border-purple-400"
                     }`}
-                    src="src/assets/default.jpg"
+                    src={Default}
                     alt="Default Profile Picture"
                   />
                 )}
