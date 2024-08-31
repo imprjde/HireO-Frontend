@@ -79,7 +79,7 @@ const Navbar = () => {
               />
             )}
           </AnimatePresence>
-          <div className="flex items-center justify-between  mx-aut max-w-7xl h-16">
+          <div className="flex items-center justify-between  mx-aut max-w-7xl min-h-16 h-16">
             <Link to="/">
               <img src={logo} className="w-[150px] md:w-[170px]" alt="logo" />
             </Link>

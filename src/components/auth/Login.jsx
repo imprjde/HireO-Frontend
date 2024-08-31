@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState } from "react";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
@@ -11,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setAuthUser, setLoading } from "@/redux/authSlice";
 import { Loader2 } from "lucide-react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import HireOLogo from "../../../src/assets/HireO.svg";
 
 const Login = () => {
   const [input, setInput] = useState({
@@ -59,6 +58,7 @@ const Login = () => {
     } else if (authUser?.role === "student") {
       navigate("/");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>
@@ -71,7 +71,8 @@ const Login = () => {
             {" "}
             <h1 className="font-bold text-xl mb-4 b w-full flex m-auto justify-center text-center ">
               <img
-                src="src/assets/HireO.svg"
+                // src="src/assets/HireO.svg"
+                src={HireOLogo}
                 className="w-[170px] md:w-[200px]"
               />
             </h1>
@@ -83,7 +84,7 @@ const Login = () => {
               name="email"
               value={input.email}
               onChange={changeEventHandler}
-              placeholder="Example@gmail.com"
+              placeholder="Example@gmail.comask"
               className="bg-zinc-700 text-sm md:text-md  w-full placeholder:tracking-wide placeholder:text-gray-300 rounded-sm h-[44px] outline-none border-none pl-3 pr-10"
             />
           </div>

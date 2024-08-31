@@ -140,6 +140,7 @@ import { Label } from "./ui/label";
 import { FaPen } from "react-icons/fa";
 import BottomNav from "./shared/BottomNav";
 import defaultProfilePic from "../../src/assets/default.jpg";
+import { toast } from "sonner";
 
 const Profile = () => {
   useGetAppliedJobs();
@@ -151,8 +152,12 @@ const Profile = () => {
   // protect route
   useEffect(() => {
     if (!authUser) {
-      navigate("/");
+      navigate("/login");
+      toast.warning("Login to view your Profile");
     }
+    return () => {
+      navigate("/");
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
