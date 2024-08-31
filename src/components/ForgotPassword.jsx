@@ -45,7 +45,7 @@ export default function ForgotPassword() {
           className="md:w-1/2  w-[90%] bg-blue-0 text-white border-gray-200 rounded-md p-4 my-10"
         >
           <div>
-            <span className="text-xs md:text-sm">
+            <span className="text-sm md:text-sm">
               A password reset link will be sent to your email .
             </span>
           </div>
@@ -63,7 +63,7 @@ export default function ForgotPassword() {
           <Button
             disabled={!email || isLoading}
             type="submit"
-            className="w-full hover:bg-sky-500 font-medium flex items-center justify-center bg-sky-500 h-9 rounded-md "
+            className="w-full hover:bg-purple-600  bg-purple-600 font-medium flex items-center justify-center  h-9 rounded-md "
           >
             {!isLoading ? (
               "Send Reset Link"

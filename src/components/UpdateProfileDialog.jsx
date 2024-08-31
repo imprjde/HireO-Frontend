@@ -304,7 +304,7 @@ export function UpdateProfileDialog({ open, setOpen }) {
   const [isLoading, setIsLoading] = useState(false);
   const [input, setInput] = useState({
     fullname: authUser?.fullname,
-    email: authUser?.email,
+    email: authUser?.email?.toLowerCase(),
     phoneNumber: authUser?.phoneNumber,
     bio: authUser?.profile?.bio,
     skills: authUser?.profile?.skills?.map((skill) => skill),
@@ -313,12 +313,19 @@ export function UpdateProfileDialog({ open, setOpen }) {
   });
 
   const validateForm = () => {
+    const trimmedPhoneNumber = String(input?.phoneNumber).trim();
+    const phoneNumberRegex = /^\d{10}$/;
     if (
       input.fullname.trim().length === 0 ||
       input.email.trim().length === 0 ||
-      input.phoneNumber.length === 0
+      trimmedPhoneNumber === 0
     ) {
       toast.warning("Please fill all the fields.");
+      return false;
+    } else if (!phoneNumberRegex.test(trimmedPhoneNumber)) {
+      toast.warning(
+        "Please enter a valid phone number with exactly 10 digits."
+      );
       return false;
     } else {
       return true;
@@ -392,8 +399,9 @@ export function UpdateProfileDialog({ open, setOpen }) {
         });
       }
     } catch (error) {
-      toast.error(error?.message);
-      console.log(error);
+      toast.error(error?.response?.data?.message, {
+        duration: 6000,
+      });
       setIsLoading(false);
     } finally {
       dispatch(setLoading(false));
