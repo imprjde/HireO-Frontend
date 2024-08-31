@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+// /* eslint-disable react/prop-types */
 // import { Button } from "@/components/ui/button";
 // import {
 //   Dialog,
@@ -22,11 +22,10 @@
 
 // export function UpdateProfileDialog({ open, setOpen }) {
 //   const { authUser } = useSelector((store) => store.auth);
-//   console.log("DINKA=", authUser);
 //   const [isLoading, setIsLoading] = useState(false);
 //   const [input, setInput] = useState({
 //     fullname: authUser?.fullname,
-//     email: authUser?.email,
+//     email: authUser?.email?.toLowerCase(),
 //     phoneNumber: authUser?.phoneNumber,
 //     bio: authUser?.profile?.bio,
 //     skills: authUser?.profile?.skills?.map((skill) => skill),
@@ -35,12 +34,19 @@
 //   });
 
 //   const validateForm = () => {
+//     const trimmedPhoneNumber = String(input?.phoneNumber).trim();
+//     const phoneNumberRegex = /^\d{10}$/;
 //     if (
 //       input.fullname.trim().length === 0 ||
 //       input.email.trim().length === 0 ||
-//       input.phoneNumber.length === 0
+//       trimmedPhoneNumber === 0
 //     ) {
 //       toast.warning("Please fill all the fields.");
+//       return false;
+//     } else if (!phoneNumberRegex.test(trimmedPhoneNumber)) {
+//       toast.warning(
+//         "Please enter a valid phone number with exactly 10 digits."
+//       );
 //       return false;
 //     } else {
 //       return true;
@@ -64,12 +70,12 @@
 
 //   const handleRemoveDp = () => {
 //     setInput({ ...input, profilePhoto: "" });
+//     console.log("Input from handle remove", input);
 //   };
 
 //   const submitHandler = async (e) => {
 //     e.preventDefault();
-
-//     console.log("INPUTIY=", input);
+//     console.log("input", input);
 //     if (!validateForm()) return;
 //     const formData = new FormData();
 //     formData.append("fullname", input.fullname);
@@ -87,18 +93,19 @@
 //     try {
 //       setIsLoading(true);
 //       dispatch(setLoading(true));
+//       axios.defaults.withCredentials = true;
 //       const res = await axios.post(
-//         "http://localhost:8000/api/v1/user/profile/update",
+//         // "http://localhost:8000/api/v1/user/profile/update",
+//         `${import.meta.env.VITE_BASE_URL}/user/profile/update`,
 //         formData,
 //         {
 //           headers: {
 //             "Content-Type": "multipart/form-data",
 //           },
-//           withCredentials: true,
 //         }
 //       );
 //       if (res.data.success) {
-//         console.log(res);
+//         console.log("API RESPONSE", res);
 //         dispatch(setAuthUser(res.data.user));
 //         toast.success(res.data.message);
 //         setIsLoading(false);
@@ -107,13 +114,15 @@
 //           email: res.data.user.email,
 //           phoneNumber: res.data.user.phoneNumber,
 //           bio: res.data.user.profile?.bio || "",
+//           profilePhoto: res?.data?.user?.profile?.profilePhoto,
 //           skills: res.data.user.profile?.skills || [],
 //           file: null,
 //         });
 //       }
 //     } catch (error) {
-//       toast.error(error?.message);
-//       console.log(error);
+//       toast.error(error?.response?.data?.message, {
+//         duration: 6000,
+//       });
 //       setIsLoading(false);
 //     } finally {
 //       dispatch(setLoading(false));
@@ -276,8 +285,9 @@
 //   );
 // }
 
-////////////////  EDIT DP BUG FIX //////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
 
+/* eslint-disable react/prop-types */
 import { Button } from "@/components/ui/button";
 import {
   Dialog,

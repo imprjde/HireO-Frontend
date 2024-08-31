@@ -62,13 +62,11 @@ const useGetAllJobs = () => {
     try {
       axios.defaults.withCredentials = true;
       const res = await axios.get(
-        // `http://localhost:8000/api/v1/job/getjob?=${searchText}&page=${page}&limit=6`
         `${
           import.meta.env.VITE_BASE_URL
         }/job/getjob?=${searchText}&page=${page}&limit=6`
       );
 
-      console.log(res.data.jobs);
       if (!res.data.success) {
         setHasMore(false);
       } else if (res.data.success) {
@@ -85,6 +83,7 @@ const useGetAllJobs = () => {
 
   useEffect(() => {
     fetchJobs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchText, page]);
 
   const loadMoreJobs = () => {

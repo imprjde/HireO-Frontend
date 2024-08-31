@@ -21,7 +21,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <App />
           <Toaster
             position="top-center"
-            visibleToasts={2}
+            visibleToasts={1}
             duration={3000}
             toastOptions={toastStyles}
           />

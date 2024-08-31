@@ -83,6 +83,7 @@ function NotificationPage() {
 
   useEffect(() => {
     const fetchNotifications = async () => {
+      console.log("fetchNotifications Running in bottom nav");
       dispatch(setIsRotated(true));
       try {
         dispatch(setIsFetchingNotifications(true));
