@@ -21,12 +21,12 @@ export default function BottomNav() {
     const fetchNotifications = async () => {
       try {
         let resp = await axios.get(
-          // `http://localhost:8000/api/v1/notification/get-notification-count`,
           `${
             import.meta.env.VITE_BASE_URL
           }/notification/get-notification-count`,
           {
             params: { userId: authUser?._id },
+            withCredentials: true,
           }
         );
 
@@ -38,7 +38,8 @@ export default function BottomNav() {
       }
     };
 
-    if (authUser) {
+    if (authUser?._id) {
+      console.log("BOLIMAGA");
       fetchNotifications();
     }
   }, [authUser, dispatch]);
@@ -57,7 +58,7 @@ export default function BottomNav() {
           >
             <GoHomeFill size={23} />
             <p className=" text-xs font-medium leading-normal tracking-[0.015em]">
-              Homeiex
+              Home
             </p>
           </NavLink>
           <NavLink
@@ -93,7 +94,7 @@ export default function BottomNav() {
               </span>
             )}
             <p className=" text-xs font-medium leading-normal tracking-[0.015em]">
-              Notification
+              Notificationxx
             </p>
           </NavLink>
           <NavLink

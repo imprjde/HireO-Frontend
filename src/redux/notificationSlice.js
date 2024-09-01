@@ -17,10 +17,9 @@ const notificationSlice = createSlice({
       state.unseenNotificationCount = action.payload;
     },
     setIsFetchingNotifications: (state, action) => {
-      state.unseenNotificationCount = action.payload;
+      state.isFetchingNotifications = action.payload;
     },
     setNotificationDetails: (state, action) => {
-      console.log("setNotificationDetails SLICEE=", action.payload);
       state.notificationDetails = action.payload;
     },
     setIsRotated: (state, action) => {

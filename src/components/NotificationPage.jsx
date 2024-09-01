@@ -83,6 +83,8 @@ function NotificationPage() {
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [authUser?._id, dispatch]);
 
+  console.log("isFetchingNotifications:=", isFetchingNotifications);
+
   useEffect(() => {
     const fetchNotifications = async () => {
       console.log("fetchNotifications Running in bottom nav");
