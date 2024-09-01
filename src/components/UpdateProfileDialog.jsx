@@ -1,4 +1,4 @@
-// /* eslint-disable react/prop-types */
+/* eslint-disable react/prop-types */
 // import { Button } from "@/components/ui/button";
 // import {
 //   Dialog,
@@ -285,7 +285,7 @@
 //   );
 // }
 
-/////////////////////////////////////////////////////////////////////////////////////
+//////////////////////// CANVA IMAGE RESIZE ///////////////////////////////////////////////////////////////////////
 
 /* eslint-disable react/prop-types */
 import { Button } from "@/components/ui/button";

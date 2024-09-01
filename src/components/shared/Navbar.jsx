@@ -14,7 +14,7 @@ import NotificationModal from "../NotificationModal";
 const links = [
   {
     id: 1,
-    link: "homeiee",
+    link: "home",
     path: "/",
   },
   {

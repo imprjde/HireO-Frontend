@@ -7,7 +7,7 @@ import ApplicationTable from "./ApplicationTable";
 import { useSelector } from "react-redux";
 import { UpdateProfileDialog } from "./UpdateProfileDialog";
 import { useNavigate } from "react-router-dom";
-// import useGetAppliedJobs from "@/hooks/useGetAppliedJobs";
+import useGetAppliedJobs from "@/hooks/useGetAppliedJobs";
 import { Label } from "./ui/label";
 import { FaPen } from "react-icons/fa";
 import BottomNav from "./shared/BottomNav";
@@ -15,14 +15,14 @@ import defaultProfilePic from "../../src/assets/default.jpg";
 import { toast } from "sonner";
 
 const Profile = () => {
-  // useGetAppliedJobs();
+  useGetAppliedJobs();
   const [open, setOpen] = useState(false);
   const { authUser } = useSelector((store) => store.auth);
 
   const navigate = useNavigate();
   // protect route
   useEffect(() => {
-    if (!authUser) { 
+    if (!authUser) {
       navigate("/login", { replace: true });
       toast.warning("Please Login to view your Profile");
     }

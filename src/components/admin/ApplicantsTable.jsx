@@ -299,7 +299,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { MoreHorizontal } from "lucide-react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 
 import { motion } from "framer-motion";
@@ -321,8 +321,10 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { setApplicantStatusLocally } from "@/redux/applicationSlice";
+// import { setApplicantStatusLocally } from "@/redux/applicationSlice";
+
 import useClickOutside from "@/helpers/useClickOutside";
+// import { useDispatch } from "react-redux";
 
 const shortlistingStatus = [
   { id: 1, status: "Accepted", value: "Accept", icon: <FaCheck /> },
@@ -348,7 +350,7 @@ const ApplicantsTable = () => {
   const { applicants, isFetchingApplicants } = useSelector(
     (store) => store.application
   );
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const modalRef = useClickOutside(() => setModal(false));
 
   const statusHandler = async () => {
@@ -371,12 +373,15 @@ const ApplicantsTable = () => {
           onAutoClose: false,
         });
         setIsStatusUpdating(false);
-        dispatch(
-          setApplicantStatusLocally({
-            applicantId: object?.id,
-            newStatus: object?.status?.toLowerCase(),
-          })
-        );
+
+        // Uncommnet Below Code to update status Locally
+
+        // dispatch(
+        //   setApplicantStatusLocally({
+        //     applicantId: object?.id,
+        //     newStatus: object?.status?.toLowerCase(),
+        //   })
+        // );
 
         setObject({
           id: "",

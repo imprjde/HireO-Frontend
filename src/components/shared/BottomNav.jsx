@@ -57,7 +57,7 @@ export default function BottomNav() {
           >
             <GoHomeFill size={23} />
             <p className=" text-xs font-medium leading-normal tracking-[0.015em]">
-              Home
+              Homeiex
             </p>
           </NavLink>
           <NavLink

@@ -42,7 +42,7 @@ const Login = () => {
       );
       if (res.data.success) {
         dispatch(setAuthUser(res.data.user));
-        navigate("/");
+        navigate("/", { replace: true });
         toast.success(res.data.message);
       }
     } catch (error) {

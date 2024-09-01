@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Notification from "./Notification";
 import BottomNav from "./shared/BottomNav";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   setAllNotifications,
   setIsFetchingNotifications,
@@ -14,6 +15,7 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 
 function NotificationPage() {
+  const [isVisible, setIsVisible] = useState(true);
   const { authUser } = useSelector((store) => store.auth);
   const { allNotifications, isFetchingNotifications } = useSelector(
     (store) => store.notification
@@ -132,16 +134,35 @@ function NotificationPage() {
       const timer = setTimeout(() => {
         navigate("/");
       }, 2000);
-
-      return () => clearTimeout(timer); // Cleanup the timer on component unmount
+      return () => clearTimeout(timer);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authUser?._id, dispatch, navigate]);
+
+  useEffect(() => {
+    let clearInfo = setTimeout(() => {
+      setIsVisible(false);
+    }, 5000);
+    return () => clearTimeout(clearInfo);
+  }, []);
   return (
     <div className="bg- text-white min-h-screen py-4 bg-red-5 px2 bg-red-">
-      {authUser?._id && (
-        <div className="text-xl font-bold my-4 pl-4">Notifications</div>
-      )}
+      {/* {authUser?._id && ( */}
+      <div className="text-xl font-bold my-4 pl-4">
+        Notifications{" "}
+        <AnimatePresence>
+          {isVisible && (
+            <motion.span
+              exit={{ opacity: 0 }}
+              transition={{ duration: 2 }}
+              className="text-sm font-medium text-gray-300"
+            >
+              ( Notifications auto-delete after 3 days )
+            </motion.span>
+          )}
+        </AnimatePresence>
+      </div>
+      {/* )} */}
       <div className="mb-16">
         {isFetchingNotifications && <NotificationsLoader />}
 

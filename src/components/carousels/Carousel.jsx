@@ -5,14 +5,25 @@ import "slick-carousel/slick/slick-theme.css";
 import CarouselItem from "./CarouselItem";
 import "./Carousel.css";
 
+// const categories = [
+//   "Frontend Developer",
+//   "Backend Developer",
+//   "Data scientist",
+//   "Graphic Designer",
+//   "UI/UX Designer",
+//   "Data Engineer",
+//   "Devops Engineer",
+// ];
 const categories = [
   "Frontend Developer",
   "Backend Developer",
-  "Data scientist",
-  "Graphic Designer",
-  "UI Developer",
-  "Data Engineer",
-  "Devops Engineer",
+  "Data Scientist",
+  "FullStack Developer",
+  "DevOps Engineer",
+  "UI/UX Designer",
+  "Mobile App Developer",
+  // "Machine Learning Engineer",
+  "Cloud Engineer",
 ];
 
 export default function Carousel({ setProgress }) {
