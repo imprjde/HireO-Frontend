@@ -39,7 +39,6 @@ export default function BottomNav() {
     };
 
     if (authUser?._id) {
-      console.log("BOLIMAGA");
       fetchNotifications();
     }
   }, [authUser, dispatch]);
@@ -58,7 +57,7 @@ export default function BottomNav() {
           >
             <GoHomeFill size={23} />
             <p className=" text-xs font-medium leading-normal tracking-[0.015em]">
-              Home
+              Hoooxme
             </p>
           </NavLink>
           <NavLink

@@ -47,7 +47,6 @@ export default function Notification({ notification }) {
   const defaultProfilePhoto =
     "https://i.pinimg.com/originals/fd/14/a4/fd14a484f8e558209f0c2a94bc36b855.png";
 
-  // console.log("notification Type=", notification?.createdAt);
   return (
     <div>
       {notification?.type === "accept" ? (

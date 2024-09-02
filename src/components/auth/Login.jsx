@@ -43,13 +43,11 @@ const Login = () => {
       );
       if (res.data.success) {
         Cookies.set("token", res?.data?.token);
-        console.log("res?.data?.token=", res?.data?.token);
         dispatch(setAuthUser(res.data.user));
         navigate("/", { replace: true });
         toast.success(res.data.message);
       }
     } catch (error) {
-      console.log(error);
       toast.error(error.response.data.message);
     } finally {
       dispatch(setLoading(false));

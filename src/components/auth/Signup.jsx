@@ -57,8 +57,6 @@ const Signup = () => {
     if (!validateForm()) {
       return;
     } else {
-      console.log("Form Submitted...");
-      console.log(input);
       const formData = new FormData();
       formData.append("fullname", input.fullname);
       formData.append("email", input.email);
@@ -82,14 +80,12 @@ const Signup = () => {
           }
         );
         if (res?.data?.success) {
-          console.log("MADESHA:", res);
           Cookies.set("token", res?.data?.token);
           dispatch(setAuthUser(res?.data?.user));
           navigate("/", { replace: true });
           toast.success(res.data.message);
         }
       } catch (error) {
-        console.log(error);
         toast.error(error.response.data.message);
       } finally {
         dispatch(setLoading(false));

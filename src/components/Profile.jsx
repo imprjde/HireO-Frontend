@@ -13,9 +13,11 @@ import { FaPen } from "react-icons/fa";
 import BottomNav from "./shared/BottomNav";
 import defaultProfilePic from "../../src/assets/default.jpg";
 import { toast } from "sonner";
+import useTokenExpirationCheck from "@/hooks/useTokenExpirationCheck";
 
 const Profile = () => {
   useGetAppliedJobs();
+  useTokenExpirationCheck();
   const [open, setOpen] = useState(false);
   const { authUser } = useSelector((store) => store.auth);
 

@@ -32,7 +32,6 @@ export default function LogoutConfirmation({ setShowModal }) {
         toast.success(res.data.message);
       }
     } catch (error) {
-      console.log(error);
       setShowModal(false);
       toast.error(error.response.data.message);
     }

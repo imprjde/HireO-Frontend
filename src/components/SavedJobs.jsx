@@ -10,8 +10,10 @@ import { setIsFetchingSavedJobs, setSavedJobs } from "@/redux/jobSlice";
 import UpdateLoader from "./loaders/UpdateLoader";
 import { toast } from "sonner";
 import SavedJobsLoader from "./loaders/SavedJobsLoader";
+import useTokenExpirationCheck from "@/hooks/useTokenExpirationCheck";
 
 export default function SavedJobs() {
+  useTokenExpirationCheck();
   const { authUser } = useSelector((store) => store.auth);
   const { savedJobs, isFetchingSavedJobs } = useSelector((store) => store.job);
   const [isRemoving, setIsRemoving] = useState(false);
@@ -28,7 +30,6 @@ export default function SavedJobs() {
       try {
         dispatch(setIsFetchingSavedJobs(true));
         const res = await axios.get(
-          // `http://localhost:8000/api/v1/saved/getSavedJobs?created_by=${authUser?._id}`
           `${import.meta.env.VITE_BASE_URL}/saved/getSavedJobs?created_by=${
             authUser?._id
           }`

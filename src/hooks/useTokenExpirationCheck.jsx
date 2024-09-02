@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setAuthUser } from "@/redux/authSlice";
 import { toast } from "sonner";
 import Cookies from "js-cookie";
+import { setClearSavedJobs } from "@/redux/jobSlice";
+import { setAllNotifications } from "@/redux/notificationSlice";
 
 const useTokenExpirationCheck = () => {
   const navigate = useNavigate();
@@ -17,20 +19,20 @@ const useTokenExpirationCheck = () => {
         const token = Cookies.get("token");
 
         if (token) {
-          console.log("CHECK EXP HOOK RUNNING", token);
           try {
             const decodedToken = JSON.parse(atob(token.split(".")[1]));
             const currentTime = Date.now() / 1000;
 
             if (decodedToken.exp < currentTime) {
-              console.log("OOPSIEEE!! Session Expired");
               dispatch(setAuthUser(null));
               setIsTokenExpired(true);
+              dispatch(setAuthUser(null));
+              dispatch(setClearSavedJobs([]));
+              dispatch(setAllNotifications([]));
               navigate("/login");
               toast.info("Your session has expired. Please Login again.");
             }
           } catch (error) {
-            console.error("Failed to decode token", error);
             dispatch(setAuthUser(null));
             navigate("/login");
             toast.error("Failed to verify session. Please log in again.");
