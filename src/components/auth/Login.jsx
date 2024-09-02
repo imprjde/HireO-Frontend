@@ -10,6 +10,7 @@ import { setAuthUser, setLoading } from "@/redux/authSlice";
 import { Loader2 } from "lucide-react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import HireOLogo from "../../../src/assets/HireO.svg";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const [input, setInput] = useState({
@@ -41,6 +42,8 @@ const Login = () => {
         }
       );
       if (res.data.success) {
+        Cookies.set("token", res?.data?.token);
+        console.log("res?.data?.token=", res?.data?.token);
         dispatch(setAuthUser(res.data.user));
         navigate("/", { replace: true });
         toast.success(res.data.message);

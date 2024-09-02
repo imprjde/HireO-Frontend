@@ -11,6 +11,7 @@ import { Loader2 } from "lucide-react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import HireOLogo from "../../../src/assets/HireO.svg";
 import Default from "../../../src/assets/default.jpg";
+import Cookies from "js-cookie";
 
 const Signup = () => {
   const [input, setInput] = useState({
@@ -82,6 +83,7 @@ const Signup = () => {
         );
         if (res?.data?.success) {
           console.log("MADESHA:", res);
+          Cookies.set("token", res?.data?.token);
           dispatch(setAuthUser(res?.data?.user));
           navigate("/", { replace: true });
           toast.success(res.data.message);

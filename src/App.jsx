@@ -208,6 +208,7 @@ import ViewNotification from "./components/ViewNotification";
 import { useSelector } from "react-redux";
 // import Animation from "./components/animation/Animation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+// import { useEffect } from "react";
 // import { reqNotifyPermission } from "./helpers/reqNotifyPermission";
 
 const appRouter = createBrowserRouter([
@@ -318,6 +319,7 @@ const appRouter = createBrowserRouter([
 
 function App() {
   const { authUser } = useSelector((store) => store.auth);
+
   // const dispatch = useDispatch();
 
   console.log("A-U-T-H:", authUser);
@@ -344,6 +346,8 @@ function App() {
   //     reqNotifyPermission(authUser?._id, dispatch);
   //   }
   // }, []);
+
+  //checking whether cookie is expired or not
 
   const queryClient = new QueryClient();
   return (

@@ -10,8 +10,10 @@ import Carousel from "./carousels/Carousel";
 import LoadingBar from "react-top-loading-bar";
 import Animation from "./animation/Animation";
 import { AnimatePresence, motion } from "framer-motion";
+import useTokenExpirationCheck from "@/hooks/useTokenExpirationCheck";
 
 const Home = () => {
+  useTokenExpirationCheck();
   const [progress, setProgress] = useState(0);
   const [isAnimating, setIsAnimating] = useState(true);
 
