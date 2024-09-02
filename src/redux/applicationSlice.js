@@ -48,6 +48,7 @@ const applicationSlice = createSlice({
     applicantStatusLocally: null,
     isFetchingApplicants: false,
     isFetchingAppliedJobs: false,
+    appliedJobsFetched: false,
   },
   reducers: {
     setAllAppliedJobs: (state, action) => {
@@ -64,9 +65,6 @@ const applicationSlice = createSlice({
       state.isFetchingApplicants = action.payload;
     },
     setApplicantStatusLocally: (state, action) => {
-      // const { applicantId, newStatus } = action.payload;
-      // console.log("Status From Slice=", action.payload);
-
       const application = state.applicants.applications.find(
         (application) => application?._id === action?.payload?.applicantId
       );
@@ -74,6 +72,9 @@ const applicationSlice = createSlice({
       if (application) {
         application.status = action?.payload?.newStatus;
       }
+    },
+    setAppliedJobsFetched(state, action) {
+      state.appliedJobsFetched = action.payload;
     },
   },
 });
@@ -83,5 +84,6 @@ export const {
   setAllApplicants,
   setIsFetchingAppliedJob,
   setApplicantStatusLocally,
+  setAppliedJobsFetched,
 } = applicationSlice.actions;
 export default applicationSlice.reducer;

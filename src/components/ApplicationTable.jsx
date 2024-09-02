@@ -7,21 +7,31 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { Badge } from "./ui/badge";
 import AppliedJobsLoader from "./loaders/AppliedJobsLoader";
+import useGetAppliedJobs from "@/hooks/useGetAppliedJobs";
+import { toast } from "sonner";
 
 const ApplicationTable = () => {
-  const { allAppliedJobs, isFetchingAppliedJobs } = useSelector(
-    (store) => store.application
-  );
+  // const { allAppliedJobs, isFetchingAppliedJobs } = useSelector(
+  //   (store) => store.application
+  // );
+
+  const { data: allAppliedJobs, isLoading, isError } = useGetAppliedJobs();
+
+  if (isLoading) {
+    return <AppliedJobsLoader />;
+  }
+
+  if (isError) {
+    return toast.error("Failed to fetch your Applied Jobs");
+  }
 
   return (
     <>
-      {isFetchingAppliedJobs && <AppliedJobsLoader />}
-      {!isFetchingAppliedJobs &&
-      allAppliedJobs &&
-      allAppliedJobs.length === 0 ? (
+      {/* {isFetchingAppliedJobs && <AppliedJobsLoader />} */}
+      {!isLoading && allAppliedJobs && allAppliedJobs.length === 0 ? (
         <>
           <span className="flex m-auto justify-center ">
             <p className="py-5 text-center text-sm md:text-base font- tracking-">
@@ -31,7 +41,7 @@ const ApplicationTable = () => {
         </>
       ) : (
         <>
-          {!isFetchingAppliedJobs && (
+          {!isLoading && (
             <Table className="bg-gray-950  ">
               <TableCaption className="my-2">
                 A list of your recent applied jobs

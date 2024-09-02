@@ -18,12 +18,18 @@ const useTokenExpirationCheck = () => {
       const checkTokenExpiration = () => {
         const token = Cookies.get("token");
 
+        console.log("useTokenExpirationCheck Hook Running");
         if (token) {
           try {
             const decodedToken = JSON.parse(atob(token.split(".")[1]));
             const currentTime = Date.now() / 1000;
+            // console.log({
+            //   "decodedToken.exp": decodedToken?.exp,
+            //   currentTime: currentTime,
+            // });
 
             if (decodedToken.exp < currentTime) {
+              console.log("OH NOOOO!! Your session has expired!!");
               dispatch(setAuthUser(null));
               setIsTokenExpired(true);
               dispatch(setAuthUser(null));
@@ -31,6 +37,8 @@ const useTokenExpirationCheck = () => {
               dispatch(setAllNotifications([]));
               navigate("/login");
               toast.info("Your session has expired. Please Login again.");
+            } else {
+              console.log("Bhai, Token is Valid");
             }
           } catch (error) {
             dispatch(setAuthUser(null));

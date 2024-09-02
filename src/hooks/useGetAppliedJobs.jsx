@@ -1,71 +1,59 @@
-// import { setAllAppliedJobs } from "@/redux/applicationSlice";
+// import {
+//   setAllAppliedJobs,
+//   setIsFetchingAppliedJob,
+// } from "@/redux/applicationSlice";
 // import axios from "axios";
-// import { useEffect, useState } from "react";
+// import { useEffect } from "react";
 // import { useDispatch } from "react-redux";
 
 // const useGetAppliedJobs = () => {
-//   const [isLoading, setIsLoading] = useState(false);
 //   const dispatch = useDispatch();
+
 //   useEffect(() => {
 //     const fetchAppliedJobs = async () => {
 //       try {
-//         setIsLoading(true);
+//         dispatch(setIsFetchingAppliedJob(true));
 //         axios.defaults.withCredentials = true;
 //         const res = await axios.get(
-//           "http://localhost:8000/api/v1/application/get"
+//           `${import.meta.env.VITE_BASE_URL}/application/get`
 //         );
 //         if (res.data.success) {
 //           dispatch(setAllAppliedJobs(res.data.application));
-//           setIsLoading(false);
+//           dispatch(setIsFetchingAppliedJob(false));
 //         }
 //       } catch (error) {
-//         setIsLoading(false);
 //         console.log(error);
+//       } finally {
+//         dispatch(setIsFetchingAppliedJob(false));
 //       }
-
-//       return isLoading;
 //     };
+
 //     fetchAppliedJobs();
-//   }, []);
+//   }, [dispatch]);
 // };
 
 // export default useGetAppliedJobs;
 
-//////////////////////////////////////////////
+/////// TANSTACK OPTIMIZATION ////////////////////////////////////////////////
 
-import {
-  setAllAppliedJobs,
-  setIsFetchingAppliedJob,
-} from "@/redux/applicationSlice";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 
 const useGetAppliedJobs = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const fetchAppliedJobs = async () => {
-      try {
-        dispatch(setIsFetchingAppliedJob(true));
-        axios.defaults.withCredentials = true;
-        const res = await axios.get(
-          // "http://localhost:8000/api/v1/application/get"
-          `${import.meta.env.VITE_BASE_URL}/application/get`
-        );
-        if (res.data.success) {
-          dispatch(setAllAppliedJobs(res.data.application));
-          dispatch(setIsFetchingAppliedJob(false));
+  return useQuery({
+    queryKey: ["appliedJobs"],
+    queryFn: async () => {
+      const res = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/application/get`,
+        {
+          withCredentials: true,
         }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        dispatch(setIsFetchingAppliedJob(false));
-      }
-    };
-
-    fetchAppliedJobs();
-  }, [dispatch]);
+      );
+      return res.data.application;
+    },
+    staleTime: 60000, // 1 minute
+    cacheTime: 300000, // 5 minutes
+  });
 };
 
 export default useGetAppliedJobs;

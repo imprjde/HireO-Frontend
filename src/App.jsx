@@ -205,7 +205,7 @@ import ForgotPassword from "./components/ForgotPassword";
 import Notification from "./components/NotificationPage";
 import ViewNotification from "./components/ViewNotification";
 // import { useEffect } from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 // import Animation from "./components/animation/Animation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // import { useEffect } from "react";
@@ -318,11 +318,9 @@ const appRouter = createBrowserRouter([
 ]);
 
 function App() {
-  const { authUser } = useSelector((store) => store.auth);
+  // const { authUser } = useSelector((store) => store.auth);
 
   // const dispatch = useDispatch();
-
-  console.log("A-U-T-H:", authUser);
 
   // useEffect(() => {
   //   const requestNotificationPermission = async () => {
