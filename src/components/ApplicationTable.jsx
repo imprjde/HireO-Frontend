@@ -14,10 +14,6 @@ import useGetAppliedJobs from "@/hooks/useGetAppliedJobs";
 import { toast } from "sonner";
 
 const ApplicationTable = () => {
-  // const { allAppliedJobs, isFetchingAppliedJobs } = useSelector(
-  //   (store) => store.application
-  // );
-
   const { data: allAppliedJobs, isLoading, isError } = useGetAppliedJobs();
 
   if (isLoading) {
@@ -25,7 +21,12 @@ const ApplicationTable = () => {
   }
 
   if (isError) {
-    return toast.error("Failed to fetch your Applied Jobs");
+    toast.error("Failed to fetch your Applied Jobs");
+    return (
+      <div className="flex justify-center py-5">
+        <p className="text-red-500">Failed to get your applied Jobs.</p>
+      </div>
+    );
   }
 
   return (

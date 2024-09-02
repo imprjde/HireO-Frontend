@@ -49,10 +49,12 @@ const useGetAppliedJobs = () => {
           withCredentials: true,
         }
       );
+      console.log("RES API CALL 10SEC:");
       return res.data.application;
     },
     staleTime: 60000, // 1 minute
     cacheTime: 300000, // 5 minutes
+    retry: false,
   });
 };
 
