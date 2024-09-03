@@ -28,6 +28,11 @@ const links = [
     link: "Saved",
     path: "/saved",
   },
+  {
+    id: 4,
+    link: "Profile",
+    path: "/profile",
+  },
 ];
 
 const Navbar = () => {
@@ -128,7 +133,7 @@ const Navbar = () => {
                               isActive
                                 ? "bg-gradient-to-r from-fuchsia-900 to-purple-900 text-white"
                                 : ""
-                            } px-3 py-1 rounded-3xl font-medium`
+                            } px-2 py-1 rounded-3xl font-medium`
                           }
                         >
                           {link.toUpperCase()}
