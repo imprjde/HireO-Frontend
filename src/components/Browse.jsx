@@ -6,11 +6,8 @@ import { motion } from "framer-motion";
 
 const Browse = () => {
   // useGetAllJobs();
-  const { searchedJobs, searchText, isSearching } = useSelector(
-    (store) => store.job
-  );
+  const { searchedJobs, searchText } = useSelector((store) => store.job);
 
-  console.log("isSearching=", isSearching);
   return (
     <div>
       <Navbar />

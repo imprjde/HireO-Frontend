@@ -24,7 +24,6 @@ const CompanyCreate = () => {
     try {
       setLoading(true);
       const res = await axios.post(
-        // "http://localhost:8000/api/v1/company/register",
         `${import.meta.env.VITE_BASE_URL}/company/register`,
         { companyName },
         {

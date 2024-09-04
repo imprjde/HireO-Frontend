@@ -189,7 +189,7 @@
 
 // export default NotificationPage;
 
-/////////////////////////   TANSTACK OPTMIZATION //////////////////////////////////////
+////////////////////////// TANSTACK OPTIMIZATION ////////////////////////////////////
 
 import { useEffect, useState } from "react";
 import Notification from "./Notification";
@@ -216,6 +216,66 @@ function NotificationPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   const fetchNotifications = async () => {
+  //     dispatch(setIsRotated(true));
+  //     try {
+  //       dispatch(setIsFetchingNotifications(true));
+  //       let resp = await axios.get(
+  //         `${import.meta.env.VITE_BASE_URL}/notification/get-notification`,
+  //         {
+  //           params: { userId: authUser?._id },
+  //         }
+  //       );
+
+  //       if (resp) {
+  //         dispatch(setAllNotifications(resp?.data?.data));
+  //         dispatch(setIsFetchingNotifications(false));
+  //         dispatch(setUnseenNotificationCount(0));
+  //         console.log(
+  //           "Notifications Fetched Successfully from Noti page",
+  //           resp.data.data
+  //         );
+  //       }
+  //     } catch (error) {
+  //       dispatch(setIsFetchingNotifications(false));
+  //       console.error("Failed to fetch notifications:", error);
+  //     }
+  //   };
+
+  //   if (authUser?._id) {
+  //     fetchNotifications();
+  //   } else {
+  //     toast.info("Please Login to view your latest Notifications");
+  //     let timer = setTimeout(() => {
+  //       navigate("/");
+  //     }, 2000);
+  //     return () => clearTimeout(timer);
+  //   }
+
+  //   return () => {
+  //     dispatch(setIsRotated(false));
+  //     const updateNotifications = async () => {
+  //       try {
+  //         await axios.put(
+  //           // `http://localhost:8000/api/v1/notification/update-notification`,
+  //           `${import.meta.env.VITE_BASE_URL}/notification/update-notification`,
+  //           {
+  //             userId: authUser?._id,
+  //           }
+  //         );
+  //       } catch (error) {
+  //         return;
+  //       }
+  //     };
+
+  //     if (authUser?._id) {
+  //       updateNotifications();
+  //     }
+  //   };
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [authUser?._id, dispatch]);
+
   useEffect(() => {
     const fetchNotifications = async () => {
       console.log("fetchNotifications Running in bottom nav");
@@ -231,33 +291,36 @@ function NotificationPage() {
 
         if (resp) {
           dispatch(setAllNotifications(resp.data.data));
-
           dispatch(setUnseenNotificationCount(0));
-          console.warn("res", resp.data);
         }
       } catch (error) {
         console.error("Failed to fetch notifications:", error);
       } finally {
+        dispatch(setUnseenNotificationCount(0));
         dispatch(setIsFetchingNotifications(false));
       }
     };
 
     const updateNotifications = async () => {
+      dispatch(setUnseenNotificationCount(0));
       console.log("-------------------updateNotifications ------------------");
       try {
         await axios.put(
           `${import.meta.env.VITE_BASE_URL}/notification/update-notification`,
           { userId: authUser?._id }
         );
+        dispatch(setUnseenNotificationCount(0));
       } catch (error) {
+        dispatch(setUnseenNotificationCount(0));
         console.error("Failed to update notifications:", error);
       }
     };
 
     if (authUser?._id) {
+      dispatch(setUnseenNotificationCount(0));
       fetchNotifications();
-      // Update notifications when component is unmounting
       return () => {
+        dispatch(setUnseenNotificationCount(0));
         dispatch(setIsRotated(false));
         updateNotifications();
       };

@@ -16,11 +16,9 @@ export default function DeleteJobConfirmation({ jobId, setJobId, setPopup }) {
     try {
       setIsDeleting(true);
       let resp = await axios.delete(
-        // `http://localhost:8000/api/v1/job/delete/${jobId}`
         `${import.meta.env.VITE_BASE_URL}/job/delete/${jobId}`
       );
 
-      console.log("DELETE API RESPONSE", resp.data.message);
       setIsDeleting(false);
       setPopup(false);
       setJobId(null);

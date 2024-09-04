@@ -80,17 +80,17 @@ const useTokenExpirationCheck = () => {
       const checkTokenExpiration = () => {
         // const token = Cookies.get("token");
         const token = localStorage.getItem("token");
-        console.log("LC TOKEN+", token);
+        // console.log("LC TOKEN+", token);
 
-        console.log("useTokenExpirationCheck Hook Running");
+        // console.log("useTokenExpirationCheck Hook Running");
         if (token) {
           try {
             const decodedToken = JSON.parse(atob(token.split(".")[1]));
             const currentTime = Date.now() / 1000;
-            console.log({
-              "decodedToken.exp": decodedToken?.exp,
-              currentTime: currentTime,
-            });
+            // console.log({
+            //   "decodedToken.exp": decodedToken?.exp,
+            //   currentTime: currentTime,
+            // });
 
             if (decodedToken.exp < currentTime) {
               console.error("OH NOOOO!! Your session has expired");
@@ -103,7 +103,7 @@ const useTokenExpirationCheck = () => {
               navigate("/login");
               toast.info("Your session has expired. Please Login again.");
             } else {
-              console.warn("LC TOKEN IS VALID");
+              // console.warn("LC TOKEN IS VALID");
             }
           } catch (error) {
             dispatch(setAuthUser(null));

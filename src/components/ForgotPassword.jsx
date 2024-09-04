@@ -23,7 +23,6 @@ export default function ForgotPassword() {
           email,
         }
       );
-      console.log(resp);
       if (resp?.data?.success) {
         setIsLoading(false);
         toast.success(resp?.data?.message, {

@@ -278,7 +278,6 @@ const noLogoDefault =
 const EditJob = () => {
   useGetCompanies(0);
   const { companies } = useSelector((store) => store.company);
-  console.log("LLM", companies);
   const { jobEditData } = useSelector((store) => store.job);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -344,7 +343,6 @@ const EditJob = () => {
       setIsLoading(false);
       navigate("/admin/jobs");
       toast.success(res?.data?.message);
-      console.log(res);
     } catch (error) {
       setIsLoading(false);
       console.log(error);

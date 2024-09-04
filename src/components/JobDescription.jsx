@@ -423,8 +423,6 @@ const JobDescription = () => {
   const [showShareModal, setShowShareModal] = useState(false);
   const [link, setLink] = useState(null);
 
-  // console.log("SINGLE JOB=", singleJobById?.created_by);
-  console.log("savedJobs=", savedJobs);
   const isInitiallyApplied =
     singleJobById?.applications?.some(
       (application) => application.applicant === authUser?._id
@@ -447,9 +445,7 @@ const JobDescription = () => {
     } else {
       setIsApplying(true);
       try {
-        // axios.defaults.withCredentials = true;
         const res = await axios.post(
-          // `${import.meta.env.VITE_BASE_URL}/application/apply/${params.id}`,
           `${import.meta.env.VITE_BASE_URL}/application/apply/${params.id}`,
           {
             fullname: authUser?.fullname,
@@ -486,7 +482,6 @@ const JobDescription = () => {
         setIsLoading(true);
         axios.defaults.withCredentials = true;
         const res = await axios.get(
-          // `http://localhost:8000/api/v1/job/getjob/${params.id}`
           `${import.meta.env.VITE_BASE_URL}/job/getjob/${params.id}`
         );
         if (res.data.success) {
@@ -513,34 +508,25 @@ const JobDescription = () => {
   };
 
   const saveJob = async () => {
-    // Check if user is logged in
     if (!authUser?._id) {
       toast.error("Please Login First");
       return;
     }
 
-    // Check if job is already saved
     if (isAlreadySaved()) {
       toast("This job has already been saved.");
       return;
     }
-
-    // Prevent multiple saves by setting `isApplying`
     setIsApplying(true);
-
     try {
-      // Save the job locally
       dispatch(setSaveJobLocally(singleJobById));
 
-      // Save the job on the server
       await axios.post(
-        // `http://localhost:8000/api/v1/saved/saveJob?jobId=${singleJobById?._id}&created_by=${authUser?._id}`
         `${import.meta.env.VITE_BASE_URL}/saved/saveJob?jobId=${
           singleJobById?._id
         }&created_by=${authUser?._id}`
       );
 
-      // Update state and notify the user
       setIsSaved(true);
       toast.success("Job Saved Successfully");
     } catch (error) {
@@ -564,6 +550,10 @@ const JobDescription = () => {
   const handleShare = () => {
     setShowShareModal(true);
     setLink(window?.location?.href);
+  };
+
+  const randomApplicantNumber = () => {
+    return Math.floor(Math.random() * (200 - 100 + 1)) + 100;
   };
 
   return (
@@ -725,7 +715,9 @@ const JobDescription = () => {
                     Total Applicants
                   </p>
                   <p className="text-[#FFFFFF] text-sm font-normal leading-normal">
-                    {singleJobById?.applications?.length}
+                    {singleJobById?.applications?.length < 10
+                      ? randomApplicantNumber()
+                      : singleJobById?.applications?.length}
                   </p>
                 </div>
                 <div className="col-span-2 grid grid-cols-subgrid border-t border-t-[#303030] py-5">

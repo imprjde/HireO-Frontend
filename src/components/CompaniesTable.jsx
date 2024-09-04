@@ -22,7 +22,6 @@ const CompaniesTable = () => {
   const { companies, searchCompanyByText, isFetchingCompanies } = useSelector(
     (store) => store.company
   );
-  console.log("Com", companies);
   const [filterCompany, setFilterCompany] = useState(companies);
   const navigate = useNavigate();
 

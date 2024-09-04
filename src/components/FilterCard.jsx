@@ -287,8 +287,6 @@ const FilterCard = ({
       }
       return newState;
     });
-
-    console.log("OBJECT=====", filterObject);
   };
   const fetchFilteredJobs = async () => {
     try {

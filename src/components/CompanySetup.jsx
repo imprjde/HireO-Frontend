@@ -76,8 +76,6 @@ const CompanySetup = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-    console.log("Inputs=", input);
-    console.log("companyLogo=", companyLogo);
     const formData = new FormData();
     formData.append("name", input.name);
     formData.append("description", input.description);
@@ -92,7 +90,6 @@ const CompanySetup = () => {
     try {
       isLoading(true);
       const res = await axios.put(
-        // `http://localhost:8000/api/v1/company/update/${params.id}`,
         `${import.meta.env.VITE_BASE_URL}/company/update/${params.id}`,
         formData,
         {
