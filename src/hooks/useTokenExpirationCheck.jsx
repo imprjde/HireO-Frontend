@@ -94,6 +94,7 @@ const useTokenExpirationCheck = () => {
 
             if (decodedToken.exp < currentTime) {
               console.error("OH NOOOO!! Your session has expired");
+              localStorage.removeItem("token");
               dispatch(setAuthUser(null));
               setIsTokenExpired(true);
               dispatch(setAuthUser(null));

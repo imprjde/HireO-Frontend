@@ -24,6 +24,7 @@ export default function LogoutConfirmation({ setShowModal }) {
       );
 
       if (res.data.success) {
+        localStorage.removeItem("token");
         dispatch(setAuthUser(null));
         dispatch(setClearSavedJobs([]));
         dispatch(setAllNotifications([]));
