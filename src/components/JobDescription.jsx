@@ -407,7 +407,7 @@ import { HiInformationCircle } from "react-icons/hi";
 import { FaShareSquare } from "react-icons/fa";
 import JobInfoLoader from "./loaders/JobInfoLoader";
 import CompanyInfoModal from "./CompanyInfoModal";
-import BottomNav from "./shared/BottomNav";
+// import BottomNav from "./shared/BottomNav";
 import { FaCheckCircle } from "react-icons/fa";
 import ApplyJobLoader from "./loaders/ApplyJobLoader";
 import ShareJobModal from "./ShareJobModal";
@@ -782,7 +782,7 @@ const JobDescription = () => {
           </div>
         </>
       )}
-      <BottomNav />
+      {/* <BottomNav /> */}
     </>
   );
 };
