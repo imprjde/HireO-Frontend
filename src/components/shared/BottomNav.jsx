@@ -256,7 +256,7 @@ export default function BottomNav() {
               </span>
             )}
             <p className=" text-xs font-medium leading-normal tracking-[0.015em]">
-              Notification
+              NotificationnnF
             </p>
           </NavLink>
           <NavLink
