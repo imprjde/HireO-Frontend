@@ -8,6 +8,7 @@ const notificationSlice = createSlice({
     isFetchingNotifications: false,
     notificationDetails: null,
     isRotated: false,
+    isNotifyAudioOn: true,
   },
   reducers: {
     setAllNotifications: (state, action) => {
@@ -25,6 +26,9 @@ const notificationSlice = createSlice({
     },
     setIsRotated: (state, action) => {
       state.isRotated = action.payload;
+    },
+    setIsNotifyAudioOn: (state, action) => {
+      state.isNotifyAudioOn = action.payload;
     },
   },
 });

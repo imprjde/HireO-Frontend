@@ -344,8 +344,9 @@ export default function BottomNav() {
         }
       );
 
-      console.log("RETURN:", data);
+      // console.log("RETURN:", data);
       dispatch(setUnseenNotificationCount(data.data));
+
       return data?.data;
     } catch (error) {
       return null;
@@ -356,7 +357,9 @@ export default function BottomNav() {
     queryFn: fetchNotifications,
     enabled: !!authUser?._id,
     staleTime: 90000,
+    // staleTime: 15000, //15 sec
     refetchInterval: 90000,
+    // refetchInterval: 15000,
   });
 
   const scrollToTop = () => {
@@ -365,6 +368,7 @@ export default function BottomNav() {
       behavior: "smooth",
     });
   };
+
   return (
     <div className="z-40 md:hidden bg-black fixed bottom-0 w-full">
       <div>
@@ -429,7 +433,7 @@ export default function BottomNav() {
           >
             <IoBookmark size={23} />
             <p className=" text-xs font-medium leading-normal tracking-[0.015em]">
-              Saved
+              Savedx
             </p>
           </NavLink>
           <NavLink
