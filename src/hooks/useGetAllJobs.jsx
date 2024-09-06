@@ -45,7 +45,7 @@
 
 // export default useGetAllJobs;
 
-//////// MULTI API CALL BUG FIX /////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
 
 import { setAllJobs, addJobs } from "@/redux/jobSlice"; // add addJobs action
 import axios from "axios";
@@ -67,7 +67,9 @@ const useGetAllJobs = () => {
         }/job/getjob?=${searchText}&page=${page}&limit=6`
       );
 
+      console.log(res.data.jobs);
       if (!res.data.success) {
+        console.log("FALSE");
         setHasMore(false);
       } else if (res.data.success) {
         if (page === 1) {

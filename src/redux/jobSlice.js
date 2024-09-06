@@ -25,7 +25,6 @@ const jobSlice = createSlice({
   reducers: {
     setAllJobs: (state, action) => {
       state.allJobs = action.payload;
-      // state.jobsFetched = true;
     },
     setJobsFetched: (state, action) => {
       state.jobsFetched = action.payload;
@@ -95,7 +94,7 @@ const jobSlice = createSlice({
       state.savedJobs = action.payload;
     },
     setFilterObject: (state, action) => {
-      //Check if this is userd anywhere or not or lese remove this
+      //Check if this is userd anywhere or not   or lese remove this
       const { key, value } = action.payload;
       state.filterObject = { ...state.filterObject, [key]: value };
     },

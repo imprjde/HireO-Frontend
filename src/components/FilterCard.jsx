@@ -1,18 +1,15 @@
-//
-
-/////////////////////// DROP DOWN ///////////////////////////////////////
-
-// // CHATGPT CODE
-
-// /* eslint-disable react/prop-types */
+/* eslint-disable react/prop-types */
 // import axios from "axios";
 // import { useEffect, useState } from "react";
+// import Collapsible from "react-collapsible";
+// import { FaAngleDown, FaAngleUp } from "react-icons/fa";
+// <FaAngleDown />;
 // import {
 //   locationFilter,
 //   industryFilter,
 //   salaryFilter,
+//   experienceFilter,
 // } from "@/helpers/filterDatas";
-
 // const FilterCard = ({
 //   jobs,
 //   setJobs,
@@ -21,15 +18,17 @@
 //   setFilterObject,
 //   SetViewFilters,
 // }) => {
-//   const [showLocation, setShowLocation] = useState(true);
-//   const [showIndustry, setShowIndustry] = useState(true);
-//   const [showSalary, setShowSalary] = useState(true);
-
+//   const [openState, setOpenState] = useState([
+//     { id: 1, isOpen: true },
+//     { id: 2, isOpen: false },
+//     { id: 3, isOpen: false },
+//     { id: 4, isOpen: false },
+//   ]);
 //   const handleFilter = (type, query) => {
 //     setFilterObject((prevState) => {
 //       const newState = { ...prevState };
 
-//       if (type === "location" || type === "industry") {
+//       if (type === "location" || type === "industry" || type === "experience") {
 //         if (newState[type].includes(query)) {
 //           newState[type] = newState[type].filter((item) => item !== query);
 //         } else {
@@ -41,17 +40,19 @@
 //       return newState;
 //     });
 //   };
-
 //   const fetchFilteredJobs = async () => {
+//     console.log("AMBII RUNNING");
 //     try {
 //       setIsLoading(true);
 //       const query = new URLSearchParams({
 //         location: filterObject.location.join(","),
 //         industry: filterObject.industry.join(","),
+//         experience: filterObject.experience.join(","),
 //         salary: filterObject.salary,
 //       }).toString();
 //       const res = await axios.get(
-//         `http://localhost:8000/api/v1/job/filterJobs?${query}`
+//         // `http://localhost:8000/api/v1/job/filterJobs?${query}`
+//         `${import.meta.env.VITE_BASE_URL}/job/filterJobs?${query}`
 //       );
 //       setJobs(res.data.jobs);
 //       setIsLoading(false);
@@ -69,136 +70,183 @@
 //   }, [filterObject]);
 
 //   const clearAllFilter = () => {
-//     setFilterObject({ location: [], industry: [], salary: "" });
+//     setFilterObject({ location: [], industry: [], experience: [], salary: "" });
 //   };
 
+//   const toggle = (id) => {
+//     setOpenState((prevState) =>
+//       prevState.map((item) =>
+//         item.id === id ? { ...item, isOpen: !item.isOpen } : item
+//       )
+//     );
+//   };
 //   return (
-//     <div className="w-full min-h-[90%]  h-fit bg-black shadow-md border border-b-0 border-x-0 border-t-0 shadow-white text-white p-3 rounded-md">
+//     // <div className="w-full min-h-[85%] h-fit  bg-black shadow-md border border-b-0 border-x-0 border-t-0  shadow-white text-white p-3 rounded-md">
+//     <div className="w-full mb-5 min-h-[38%] h-fit  bg-black  shadow shadow-white text-white p-3 rounded-md">
 //       <div className="flex items-center justify-between">
 //         <h1 className="font-bold text-base tabular-nums">
 //           Filter Jobs ({jobs?.length})
 //         </h1>
 //       </div>
 //       <hr className="mt-3" />
-
-//       <ul className="mt-4">
-//         {/* Location Section */}
-//         <div>
-//           <h1
-//             className="font-medium text-base cursor-pointer flex items-center justify-between"
-//             onClick={() => setShowLocation(!showLocation)}
-//           >
-//             Location
-//             <span>{showLocation ? "-" : "+"}</span>
-//           </h1>
-//           {showLocation && (
-//             <div className="overflow-y-auto max-h-[115px] mb-2">
-//               {locationFilter[0].array.map((item, idx) => {
-//                 const itemId = `loc-${idx}`;
-//                 return (
-//                   <div key={idx} className="flex items-center space-x-2 my-1">
-//                     <input
-//                       type="checkbox"
-//                       id={itemId}
-//                       checked={filterObject.location.includes(
-//                         item.toLowerCase()
-//                       )}
-//                       onChange={() =>
-//                         handleFilter("location", item.toLowerCase())
-//                       }
-//                       className=" w-3 h-3 cursor-pointer"
-//                     />
-//                     <label
-//                       htmlFor={itemId}
-//                       className="text-[13px] font-semibold cursor-pointer"
-//                     >
-//                       {item}
-//                     </label>
-//                   </div>
-//                 );
-//               })}
+//       <ul className="mt-4 space-y-3">
+//         <Collapsible
+//           open={true}
+//           trigger={
+//             <div
+//               onClick={() => toggle(1)}
+//               className="flex  w-[50%] justify-between space-x-2 items-center"
+//             >
+//               <h1 className="font-medium text-base">Location</h1>
+//               <h1 className="font-medium text-base mt-1">
+//                 {!openState[0].isOpen ? <FaAngleDown /> : <FaAngleUp />}
+//               </h1>
 //             </div>
-//           )}
-//         </div>
+//           }
+//         >
+//           <div className="overflow-y-auto max-h-[150px] mb-2">
+//             {locationFilter[0].array.map((item, idx) => {
+//               const itemId = `loc-${idx}`;
+//               return (
+//                 <div key={idx} className="flex items-center space-x-2 my-1">
+//                   <input
+//                     type="checkbox"
+//                     id={itemId}
+//                     checked={filterObject.location.includes(item.toLowerCase())}
+//                     onChange={() =>
+//                       handleFilter("location", item.toLowerCase())
+//                     }
+//                     className=" w-3 h-3 cursor-pointer"
+//                   />
+//                   <label
+//                     htmlFor={itemId}
+//                     className="text-[13px] font-semibold cursor-pointer"
+//                   >
+//                     {item}
+//                   </label>
+//                 </div>
+//               );
+//             })}
+//           </div>
+//         </Collapsible>
 
-//         {/* Industry Section */}
-//         <div>
-//           <h1
-//             className="font-medium text-base cursor-pointer flex items-center justify-between"
-//             onClick={() => setShowIndustry(!showIndustry)}
-//           >
-//             Industry
-//             <span>{showIndustry ? "-" : "+"}</span>
-//           </h1>
-//           {showIndustry && (
-//             <div className="overflow-y-auto max-h-[115px] mb-2">
-//               {industryFilter[0].array.map((item, idx) => {
-//                 const itemId = `ind-${idx}`;
-//                 return (
-//                   <div key={idx} className="flex items-center space-x-2 my-1">
-//                     <input
-//                       type="checkbox"
-//                       id={itemId}
-//                       checked={filterObject.industry.includes(
-//                         item.toLowerCase()
-//                       )}
-//                       onChange={() =>
-//                         handleFilter("industry", item.toLowerCase())
-//                       }
-//                       className="bg-white cursor-pointer w-3 h-3  text-gray-900"
-//                     />
-//                     <label
-//                       htmlFor={itemId}
-//                       className="text-[13px] font-semibold cursor-pointer"
-//                     >
-//                       {item}
-//                     </label>
-//                   </div>
-//                 );
-//               })}
+//         <Collapsible
+//           trigger={
+//             <div
+//               onClick={() => toggle(2)}
+//               className="flex w-[50%] justify-between space-x-2 items-center"
+//             >
+//               <h1 className="font-medium text-base">Industry</h1>
+//               <h1 className="font-medium text-base mt-1">
+//                 {!openState[1].isOpen ? <FaAngleDown /> : <FaAngleUp />}
+//               </h1>
 //             </div>
-//           )}
-//         </div>
+//           }
+//         >
+//           <div className="overflow-y-auto max-h-[150px] mb-2">
+//             {industryFilter[0].array.map((item, idx) => {
+//               const itemId = `ind-${idx}`;
+//               return (
+//                 <div key={idx} className="flex items-center space-x-2 my-1">
+//                   <input
+//                     type="checkbox"
+//                     id={itemId}
+//                     checked={filterObject.industry.includes(item.toLowerCase())}
+//                     onChange={() =>
+//                       handleFilter("industry", item.toLowerCase())
+//                     }
+//                     className="bg-white cursor-pointer w-3 h-3  text-gray-900"
+//                   />
+//                   <label
+//                     htmlFor={itemId}
+//                     className="text-[13px] font-semibold cursor-pointer"
+//                   >
+//                     {item}
+//                   </label>
+//                 </div>
+//               );
+//             })}
+//           </div>
+//         </Collapsible>
 
-//         {/* Salary Section */}
-//         <div>
-//           <h1
-//             className="font-medium text-base cursor-pointer flex items-center justify-between"
-//             onClick={() => setShowSalary(!showSalary)}
-//           >
-//             Salary
-//             <span>{showSalary ? "-" : "+"}</span>
-//           </h1>
-//           {showSalary && (
-//             <div className="overflow-y-auto max-h-[200px]  pb-1">
-//               {salaryFilter[0].array.map((item, idx) => {
-//                 const itemId = `sal-${idx}`;
-//                 return (
-//                   <div key={idx} className="flex items-center space-x-2 my-1">
-//                     <input
-//                       type="checkbox"
-//                       id={itemId}
-//                       name="salary"
-//                       value={item.value}
-//                       checked={filterObject.salary === item.value}
-//                       onChange={() => handleFilter("salary", item.value)}
-//                       className="bg-white w-3 h-3  cursor-pointer text-gray-900"
-//                     />
-//                     <label
-//                       htmlFor={itemId}
-//                       className="text-[13px] font-semibold cursor-pointer"
-//                     >
-//                       {item.range}
-//                     </label>
-//                   </div>
-//                 );
-//               })}
+//         <Collapsible
+//           trigger={
+//             <div
+//               onClick={() => toggle(3)}
+//               className="flex w-[50%] justify-between space-x-2 items-center"
+//             >
+//               <h1 className="font-medium text-base">Experience</h1>
+//               <h1 className="font-medium text-base mt-1">
+//                 {!openState[2].isOpen ? <FaAngleDown /> : <FaAngleUp />}
+//               </h1>
 //             </div>
-//           )}
-//         </div>
+//           }
+//         >
+//           <div className="overflow-y-auto max-h-[150px] mb-2">
+//             {experienceFilter[0].array.map((item, idx) => {
+//               const itemId = `ind-${idx}`;
+//               return (
+//                 <div key={idx} className="flex items-center space-x-2 my-1">
+//                   <input
+//                     type="checkbox"
+//                     id={itemId}
+//                     checked={filterObject.experience.includes(item?.value)}
+//                     onChange={() => handleFilter("experience", item.value)}
+//                     className="bg-white cursor-pointer w-3 h-3  text-gray-900"
+//                   />
+//                   <label
+//                     htmlFor={itemId}
+//                     className="text-[13px] font-semibold cursor-pointer"
+//                   >
+//                     {item.yoe}
+//                   </label>
+//                 </div>
+//               );
+//             })}
+//           </div>
+//         </Collapsible>
 
-//         {/* Clear Filters and Apply Buttons */}
-//         <div className="mt-1 m-auto justify-between flex">
+//         <Collapsible
+//           trigger={
+//             <div
+//               onClick={() => toggle(4)}
+//               className="flex  w-[50%] justify-between space-x-2 items-center"
+//             >
+//               <h1 className="font-medium text-base">Salary</h1>
+//               <h1 className="font-medium text-base mt-1">
+//                 {!openState[3].isOpen ? <FaAngleDown /> : <FaAngleUp />}
+//               </h1>
+//             </div>
+//           }
+//         >
+//           {" "}
+//           <div className="overflow-y-auto max-h-[150px]  pb-1">
+//             {salaryFilter[0].array.map((item, idx) => {
+//               const itemId = `sal-${idx}`;
+//               return (
+//                 <div key={idx} className="flex items-center space-x-2 my-1">
+//                   <input
+//                     type="checkbox"
+//                     id={itemId}
+//                     name="salary"
+//                     value={item.value}
+//                     checked={filterObject.salary === item.value}
+//                     onChange={() => handleFilter("salary", item.value)}
+//                     className="bg-white w-3 h-3  cursor-pointer text-gray-900"
+//                   />
+//                   <label
+//                     htmlFor={itemId}
+//                     className="text-[13px] font-semibold cursor-pointer"
+//                   >
+//                     {item.range}
+//                   </label>
+//                 </div>
+//               );
+//             })}
+//           </div>
+//         </Collapsible>
+
+//         <div className="mt-1  m-auto justify-between flex">
 //           <button
 //             onClick={clearAllFilter}
 //             className="bg-gray-100 flex items-center space-x-1 text-black text-sm font-semibold px-2 py-0.5 rounded-sm"
@@ -217,10 +265,11 @@
 //             </span>
 //           </button>
 //           {(filterObject?.location?.length > 0 ||
-//             filterObject?.industry?.length > 0) && (
+//             filterObject?.industry?.length > 0 ||
+//             filterObject?.experience?.length > 0) && (
 //             <button
 //               onClick={() => SetViewFilters(true)}
-//               className="bg-sky-700 text-white flex space-x-1 items-center text-sm font-semibold px-2 py-0.5 rounded-sm"
+//               className="bg-sky-700 text-white flex space-x-1 items-center  text-sm font-semibold px-2 py-0.5 rounded-sm"
 //             >
 //               <span>Applied</span>
 //               <span className="rotate-90">
@@ -244,11 +293,9 @@
 
 // export default FilterCard;
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////// TANSTACK QUERY ////////////////////////////////////////////////////
 
-/* eslint-disable react/prop-types */
-import axios from "axios";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import Collapsible from "react-collapsible";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 <FaAngleDown />;
@@ -260,8 +307,6 @@ import {
 } from "@/helpers/filterDatas";
 const FilterCard = ({
   jobs,
-  setJobs,
-  setIsLoading,
   filterObject,
   setFilterObject,
   SetViewFilters,
@@ -288,33 +333,6 @@ const FilterCard = ({
       return newState;
     });
   };
-  const fetchFilteredJobs = async () => {
-    try {
-      setIsLoading(true);
-      const query = new URLSearchParams({
-        location: filterObject.location.join(","),
-        industry: filterObject.industry.join(","),
-        experience: filterObject.experience.join(","),
-        salary: filterObject.salary,
-      }).toString();
-      const res = await axios.get(
-        // `http://localhost:8000/api/v1/job/filterJobs?${query}`
-        `${import.meta.env.VITE_BASE_URL}/job/filterJobs?${query}`
-      );
-      setJobs(res.data.jobs);
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    if (filterObject && Object.keys(filterObject).length > 0) {
-      fetchFilteredJobs();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterObject]);
 
   const clearAllFilter = () => {
     setFilterObject({ location: [], industry: [], experience: [], salary: "" });

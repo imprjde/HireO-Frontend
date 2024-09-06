@@ -171,12 +171,13 @@ const Jobs = () => {
     experience: [],
     salary: "",
   });
-  const [jobss, setJobs] = useState([]);
-  const [isLoadinsg, setIsLoading] = useState(false);
+
   const [showFilter, setShowFilter] = useState(false);
   const [viewFilters, SetViewFilters] = useState(false);
   const [viewFiltersTwo, setViewFiltersTwo] = useState(false);
-  const [initialFetch, setInitialFetch] = useState(true);
+  const [hasAnimated, setHAsAnimated] = useState(false);
+
+  console.log("HAS ANIMATED::", hasAnimated);
 
   const { authUser } = useSelector((store) => store.auth);
 
@@ -189,38 +190,31 @@ const Jobs = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authUser?.role]);
 
-  const fetchJobs = async (filterObject) => {
+  const fetchJobs = async ({ queryKey }) => {
+    setHAsAnimated(true);
+    console.log("fetchJobs...}");
+    const filterObject = queryKey[1];
     const query = new URLSearchParams({
       location: filterObject.location.join(","),
       industry: filterObject.industry.join(","),
       experience: filterObject.experience.join(","),
       salary: filterObject.salary,
     }).toString();
-    const res = await axios.get(
+
+    const { data } = await axios.get(
       `${import.meta.env.VITE_BASE_URL}/job/filterJobs?${query}`
     );
-    return res.data.jobs;
-  };
-  const {
-    data: jobs,
-    isLoading: isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["jobs", filterObject],
-    queryFn: () => fetchJobs(filterObject),
-    initialData: [],
-    enabled:
-      initialFetch ||
-      Object.values(filterObject).some((val) => val.length > 0 || val),
-    onSuccess: () => {
-      if (initialFetch) setInitialFetch(false); // Set initial fetch to false after first successful fetch
-    },
-  });
 
-  useEffect(() => {
-    // Refetch jobs when filterObject changes
-    refetch();
-  }, [filterObject, refetch]);
+    // setHAsAnimated(false);
+    return data?.jobs;
+  };
+
+  const { data: jobs = [], isLoading } = useQuery({
+    queryKey: ["filteredJobs", filterObject],
+    queryFn: fetchJobs,
+    keepPreviousData: true,
+    staleTime: 10 * 60 * 1000, // 10 mins
+  });
 
   return (
     <div className="min-h-screen relative ">
@@ -239,9 +233,9 @@ const Jobs = () => {
             {!showFilter && (
               <motion.div
                 onClick={() => setShowFilter(true)}
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.5, type: "spring", stiffness: 200 }}
+                // initial={{ scale: 0 }}
+                // animate={{ scale: 1 }}
+                // transition={{ duration: 0.5, type: "spring", stiffness: 200 }}
                 className="fixed bottom-[72px] md:hidden right-4 z-40"
               >
                 <button className="flex border-[1.5px]    border-gray-600 space-x-1 items-center bg-gradient-to-r from-purple-700 to-gray-900 hover:from-gray-900 hover:to-purple-700 text-white font-semibold text-sm py-1.5 px-4 rounded-full ">
@@ -266,12 +260,12 @@ const Jobs = () => {
           <div className="hidden md:flex min-w-[20%] pt-7">
             <FilterCard
               jobs={jobs}
-              setJobs={setJobs}
               isLoading={isLoading}
-              setIsLoading={setIsLoading}
+              // setIsLoading={setIsLoading}
               filterObject={filterObject}
               setFilterObject={setFilterObject}
               SetViewFilters={SetViewFilters}
+              fetchFilteredJobs={fetchJobs}
             />
           </div>
 
@@ -284,6 +278,7 @@ const Jobs = () => {
                 filterObject={filterObject}
                 setFilterObject={setFilterObject}
                 setViewFiltersTwo={setViewFiltersTwo}
+                fetchFilteredJobs={fetchJobs}
                 jobs={jobs}
               />
             )}
@@ -301,10 +296,10 @@ const Jobs = () => {
                   jobs.map((job, index) => (
                     <motion.div
                       key={job._id}
-                      // initial={{ opacity: 0, x: 100 }}
-                      // animate={{ opacity: 1, x: 0 }}
-                      // exit={{ opacity: 0, x: -100 }}
-                      // transition={{ duration: 0.3 }}
+                      initial={hasAnimated ? { opacity: 0, x: 100 } : false}
+                      animate={hasAnimated ? { opacity: 1, x: 0 } : false}
+                      exit={{ opacity: 0, x: -100 }}
+                      transition={{ duration: 0.3 }}
                     >
                       <Job job={job} index={index} />
                     </motion.div>
