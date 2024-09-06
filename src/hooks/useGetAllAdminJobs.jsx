@@ -16,7 +16,6 @@ const useGetAllAdminJobs = () => {
         axios.defaults.withCredentials = true;
 
         const res = await axios.get(
-          // `http://localhost:8000/api/v1/job/getadminjobs?page=${page}`
           `${import.meta.env.VITE_BASE_URL}/job/getadminjobs?page=${page}`
         );
 

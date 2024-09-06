@@ -1,0 +1,21 @@
+/* Custom styles for Intro.js */
+.introjs-tooltip {
+  @apply text-white md:hidden   bg-gradient-to-b  from-purple-300 to-purple-950  rounded-lg shadow-lg text-justify font-semibold mr-10;
+  /* @apply text-white md:hidden   bg-gradient-to-b  from-purple-900 to-gray-300  rounded-lg shadow-lg  font-semibold mr-10; */
+}
+
+.introjs-tooltipbuttons {
+  @apply flex justify-between   opacity-0; /* TailwindCSS classes */
+}
+
+.introjs-tooltipbutton {
+  @apply bg-purple-700 text-white  py-2 px-4 rounded-md hover:bg-purple-600;
+}
+
+.introjs-helperLayer {
+  @apply rounded-3xl md:hidden; /* TailwindCSS class for overlay background */
+}
+
+.introjs-skipbutton {
+  @apply text-black font-bold  text-base    bg-white  w-fit h-fit  mt-2 mr-2 px-2 py-0.5 ml-44 rounded-md;
+}
