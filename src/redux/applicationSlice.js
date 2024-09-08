@@ -16,7 +16,6 @@ const applicationSlice = createSlice({
     //   state.allAppliedJobs = action.payload;
     // },
     setAllAppliedJobs: (state, action) => {
-      console.log("setAllAppliedJobs Slice", action.payload);
       state.allAppliedJobs = action.payload;
     },
     addAppliedJobs(state, action) {

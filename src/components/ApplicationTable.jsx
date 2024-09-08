@@ -118,17 +118,19 @@ import { Badge } from "./ui/badge";
 import AppliedJobsLoader from "./loaders/AppliedJobsLoader";
 import useGetAppliedJobs from "@/hooks/useGetAppliedJobs";
 import { toast } from "sonner";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 
 const ApplicationTable = () => {
   const [page, setPage] = useState(1);
-  const { allAppliedJobs } = useSelector((store) => store.application); // Get jobs from Redux store
-  const { isLoading, isError } = useGetAppliedJobs(page);
+  const [hasMore, setHasMore] = useState(true);
+  const { allAppliedJobs, isFetchingAppliedJobs } = useSelector(
+    (store) => store.application
+  );
+  const { isLoading, isError } = useGetAppliedJobs(page, setHasMore);
 
-  console.log("allAppliedJobs?.length", allAppliedJobs?.length);
-
-  if (isLoading && allAppliedJobs?.length <= 4) {
+  console.log(isFetchingAppliedJobs);
+  if (isLoading && allAppliedJobs?.length < 5) {
     return <AppliedJobsLoader />;
   }
   if (isError) {
@@ -154,10 +156,7 @@ const ApplicationTable = () => {
       ) : (
         <>
           <div className="flex bg-red- m-auto items-start  justify-between p-5 ">
-            <h1
-              // className="text-lg md:text-xl font-bold p-5"
-              className="text-lg md:text-xl font-bold  items-center"
-            >
+            <h1 className="text-lg md:text-xl font-bold  items-center">
               Applied Jobs ({allAppliedJobs?.length})
             </h1>
           </div>
@@ -166,14 +165,18 @@ const ApplicationTable = () => {
               <TableCaption className="my-2">
                 <div className="mb-3 m-auto justify-center w-full flex ">
                   {!isLoading ? (
-                    <button
-                      onClick={() => setPage(page + 1)}
-                      className="text-white bg-zinc-900 px-2 py-1 rounded-md"
-                    >
-                      Load More
-                    </button>
+                    <>
+                      {hasMore && (
+                        <button
+                          onClick={() => setPage(page + 1)}
+                          className="text-gray-900 w-1/2  md:w-[200px] font-medium px-4 bg-white  mx-10  py-1.5 rounded-sm"
+                        >
+                          Load More
+                        </button>
+                      )}
+                    </>
                   ) : (
-                    <div className="w-8 h-8 border-4 border-t-4 mt-5 border-transparent border-t-white rounded-full animate-spin"></div>
+                    <div className="w-7 h-7 border-4 border-t-4  border-transparent border-t-white rounded-full animate-spin"></div>
                   )}
                 </div>
                 <span>A list of your recent applied jobs</span>
