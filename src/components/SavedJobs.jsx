@@ -93,10 +93,15 @@ export default function SavedJobs() {
           {isRemoving && <UpdateLoader message={"Removing..."} />}
           <div>
             <>
-              {" "}
-              <span className="w-full m-auto flex pl-4 justify- mt-4 font-extrabold text-xl tracking-wider">
-                Your Saved Jobs ({savedJobs?.length})
-              </span>
+              <div className="w-fit">
+                {!isFetchingSavedJobs ? (
+                  <span className="w-full m-auto flex pl-4 justify- mt-4 font-extrabold text-xl tracking-wider">
+                    Your Saved Jobs ({savedJobs?.length})
+                  </span>
+                ) : (
+                  <div className="w-[220px] ml-3 h-6 bg-gray-600 rounded-sm animate-pulse"></div>
+                )}
+              </div>
               <div className="mt-10 md:grid space-y-5 md:space-y-0 md:grid-cols-3 gap-5">
                 {!isFetchingSavedJobs &&
                   savedJobs?.map((job) => (

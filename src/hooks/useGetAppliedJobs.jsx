@@ -65,7 +65,6 @@ const useGetAppliedJobs = (page, setHasMore) => {
           withCredentials: true,
         }
       );
-      console.log("RES API CALL 10SEC:", res.data.application);
       setHasMore(res?.data?.hasMore);
       if (page === 1) {
         dispatch(setAllAppliedJobs(res?.data?.application));
