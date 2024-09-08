@@ -1,4 +1,4 @@
-// import { setAllJobs, addJobs } from "@/redux/jobSlice"; // add addJobs action
+// import { setAllJobs, addJobs } from "@/redux/jobSlice";
 // import axios from "axios";
 // import { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +13,9 @@
 //     try {
 //       axios.defaults.withCredentials = true;
 //       const res = await axios.get(
-//         `http://localhost:8000/api/v1/job/getjob? =${searchText}&page=${page}&limit=6`
+//         `${
+//           import.meta.env.VITE_BASE_URL
+//         }/job/getjob?=${searchText}&page=${page}&limit=6`
 //       );
 
 //       console.log(res.data.jobs);
@@ -34,6 +36,7 @@
 
 //   useEffect(() => {
 //     fetchJobs();
+//     // eslint-disable-next-line react-hooks/exhaustive-deps
 //   }, [searchText, page]);
 
 //   const loadMoreJobs = () => {
@@ -45,9 +48,9 @@
 
 // export default useGetAllJobs;
 
-/////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////  TSQ OPTIMIZATION //////////////////////////////////////////////////
 
-import { setAllJobs, addJobs } from "@/redux/jobSlice"; // add addJobs action
+import { setAllJobs, addJobs } from "@/redux/jobSlice";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

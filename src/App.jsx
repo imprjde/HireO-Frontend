@@ -348,6 +348,7 @@ function App() {
   //checking whether cookie is expired or not
 
   const queryClient = new QueryClient();
+
   return (
     <div className="bg-gradient-to-b min-h-screen bg-black">
       <QueryClientProvider client={queryClient}>

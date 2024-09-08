@@ -1,60 +1,87 @@
-// import {
-//   setAllAppliedJobs,
-//   setIsFetchingAppliedJob,
-// } from "@/redux/applicationSlice";
+// import { useQuery } from "@tanstack/react-query";
 // import axios from "axios";
-// import { useEffect } from "react";
-// import { useDispatch } from "react-redux";
 
 // const useGetAppliedJobs = () => {
-//   const dispatch = useDispatch();
-
-//   useEffect(() => {
-//     const fetchAppliedJobs = async () => {
-//       try {
-//         dispatch(setIsFetchingAppliedJob(true));
-//         axios.defaults.withCredentials = true;
-//         const res = await axios.get(
-//           `${import.meta.env.VITE_BASE_URL}/application/get`
-//         );
-//         if (res.data.success) {
-//           dispatch(setAllAppliedJobs(res.data.application));
-//           dispatch(setIsFetchingAppliedJob(false));
+//   return useQuery({
+//     queryKey: ["appliedJobs"],
+//     queryFn: async () => {
+//       const res = await axios.get(
+//         `${import.meta.env.VITE_BASE_URL}/application/get`,
+//         {
+//           withCredentials: true,
 //         }
-//       } catch (error) {
-//         console.log(error);
-//       } finally {
-//         dispatch(setIsFetchingAppliedJob(false));
-//       }
-//     };
-
-//     fetchAppliedJobs();
-//   }, [dispatch]);
+//       );
+//       console.log("RES API CALL 10SEC:");
+//       return res.data.application;
+//     },
+//     staleTime: 60000, // 1 minute
+//     cacheTime: 300000, // 5 minutes
+//     retry: false,
+//   });
 // };
 
 // export default useGetAppliedJobs;
 
-/////// TANSTACK OPTIMIZATION ////////////////////////////////////////////////
+///////////////////////////////// APPLIED JOB PAGINATION /////////////////////////////////////////////////
 
+// import { useQuery } from "@tanstack/react-query";
+// import axios from "axios";
+
+// const useGetAppliedJobs = (page) => {
+//   return useQuery({
+//     queryKey: ["appliedJobs", page],
+//     queryFn: async () => {
+//       const res = await axios.get(
+//         `${import.meta.env.VITE_BASE_URL}/application/get?page=${page}`,
+//         {
+//           withCredentials: true,
+//         }
+//       );
+//       console.log("RES API CALL 10SEC:", res.data);
+//       return res.data.application;
+//     },
+//     staleTime: 60000, // 1 minute
+//     cacheTime: 300000, // 5 minutes
+//     retry: false,
+//   });
+// };
+
+// export default useGetAppliedJobs;
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+import { useDispatch } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { addAppliedJobs, setAllAppliedJobs } from "@/redux/applicationSlice";
 
-const useGetAppliedJobs = () => {
+const useGetAppliedJobs = (page) => {
+  const dispatch = useDispatch();
   return useQuery({
-    queryKey: ["appliedJobs"],
+    queryKey: ["appliedJobs", page],
     queryFn: async () => {
+      
       const res = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/application/get`,
+        `${import.meta.env.VITE_BASE_URL}/application/get?page=${page}`,
         {
           withCredentials: true,
         }
       );
-      console.log("RES API CALL 10SEC:");
+      console.log("RES API CALL 10SEC:", res.data);
+
+      if (page === 1) {
+        dispatch(setAllAppliedJobs(res?.data?.application));
+      } else {
+        dispatch(addAppliedJobs(res?.data?.application));
+      }
+
       return res.data.application;
     },
-    staleTime: 60000, // 1 minute
-    cacheTime: 300000, // 5 minutes
+    // staleTime: 60000,
+    cacheTime: 300000000,
+    // staleTime: 60000,
+    staleTime: 60000000,
     retry: false,
+    keepPreviousData: true,
   });
 };
 
