@@ -75,11 +75,8 @@ const useGetAppliedJobs = (page, setHasMore) => {
 
       return res.data.application;
     },
-    // staleTime: 60000,
-    cacheTime: 300000000,
-    // staleTime: 60000,
-    staleTime: 60000000,
-    retry: false,
+    staleTime: Infinity,
+    cacheTime: Infinity,
     keepPreviousData: true,
   });
 };
