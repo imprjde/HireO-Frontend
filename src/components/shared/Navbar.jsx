@@ -74,7 +74,7 @@ const Navbar = () => {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -200, opacity: 0 }}
           transition={{ duration: 0.5, ease: "linear" }}
-          className=" text-white bg-black sticky top-0 z-40 pr-4 md:pr-0  md:px-4 md:pt-1 "
+          className=" text-white  bg-black sticky top-0 z-40 pr-4 md:pr-0  md:px-4 md:pt-1 "
         >
           <AnimatePresence>
             {showModal && (
