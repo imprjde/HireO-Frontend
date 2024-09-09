@@ -398,7 +398,8 @@ const Jobs = () => {
     queryKey: ["filteredJobs", filterObject],
     queryFn: fetchJobs,
     keepPreviousData: true,
-    staleTime: 10 * 60 * 1000, // 10 mins
+    // staleTime: 10 * 60 * 1000, // 10 mins
+    staleTime: Infinity,
   });
   const handleOnboardedUpdate = async () => {
     try {
@@ -508,12 +509,16 @@ const Jobs = () => {
               />
             )}
           </AnimatePresence>
-          {isLoading && <FilterLoader />}
+          {isLoading && (
+            <div className="overflow-x-hidden overflow-y-hidden flex h-screen ">
+              <FilterLoader />
+            </div>
+          )}
           {!isLoading && jobs?.length === 0 ? (
             <Jobnotfound />
           ) : (
             <div className="flex-1 my-6 mb-16 md:mt-0   overflow-y-auto overflow-x-hidden no-scrollbar pb-5">
-              <div className="mx-3 md:pt-7 grid md:grid-cols-3 gap-4">
+              <div className="mx-3 pt-6 grid md:grid-cols-3 gap-4">
                 {jobs &&
                   jobs.map((job, index) => (
                     <>
