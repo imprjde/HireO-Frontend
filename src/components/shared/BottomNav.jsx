@@ -211,10 +211,10 @@ export default function BottomNav() {
   });
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    // window.scrollTo({
+    //   top: 0,
+    //   behavior: "smooth",
+    // });
   };
 
   return (
@@ -232,7 +232,7 @@ export default function BottomNav() {
           >
             <GoHomeFill size={23} />
             <p className=" text-xs font-medium leading-normal tracking-[0.015em]">
-              Homie
+              Home
             </p>
           </NavLink>
           <NavLink
