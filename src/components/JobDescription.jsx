@@ -403,7 +403,6 @@ import JobInfoLoader from "./loaders/JobInfoLoader";
 import CompanyInfoModal from "./CompanyInfoModal";
 import { FaCheckCircle } from "react-icons/fa";
 import ApplyJobLoader from "./loaders/ApplyJobLoader";
-import ShareJobModal from "./ShareJobModal";
 import { AnimatePresence } from "framer-motion";
 
 const JobDescription = () => {
@@ -413,8 +412,6 @@ const JobDescription = () => {
   const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isApplying, setIsApplying] = useState(false);
-  const [showShareModal, setShowShareModal] = useState(false);
-  const [link, setLink] = useState(null);
 
   const isInitiallyApplied =
     singleJobById?.applications?.some(
@@ -540,49 +537,29 @@ const JobDescription = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [savedJobs, singleJobById?._id]);
 
-  const handleShare = () => {
-    setShowShareModal(true);
-    setLink(window?.location?.href);
-  };
-
   const randomApplicantNumber = () => {
     return Math.floor(Math.random() * (200 - 100 + 1)) + 100;
   };
 
-  ////////////////////////////////////////////////////////////////////
-
   const handleNavigatorShare = async () => {
     const shareDetails = {
-      title: "Default Title Bhau",
-      text: "Check this out Bhauu!",
-      // url: window.location.href,
-      url: "https://developers.google.com/blogger/docs/3.0/using",
+      title: "Check out this New Job Posting on HierO !",
+      text: "Check out this New Job Posting on HierO !",
+      url: window?.location?.href,
     };
 
     if (navigator.share) {
       try {
         await navigator.share(shareDetails);
-        console.log("Content shared successfully!");
       } catch (error) {
-        console.error("Error sharing:", error);
-        alert("Error sharing");
+        return;
       }
     } else {
-      alert("Web Share API is not supported in this browser");
-      console.log("Web Share API is not supported in this browser.");
+      console.log("Share feature unavailable for your browser.");
     }
   };
   return (
     <>
-      <AnimatePresence>
-        {showShareModal && (
-          <ShareJobModal
-            link={link}
-            setLink={setLink}
-            setShowShareModal={setShowShareModal}
-          />
-        )}
-      </AnimatePresence>
       {isApplying && <ApplyJobLoader />}
       <AnimatePresence>
         {showModal && (
@@ -611,11 +588,9 @@ const JobDescription = () => {
                 </h2>
                 <div className="flex w-12 items-center justify-end">
                   <button
-                    // onClick={handleShare}
                     onClick={handleNavigatorShare}
                     className="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-transparent text-[#FFFFFF] gap-2 text-base font-bold leading-normal tracking-[0.015em] min-w-0 p-0"
                   >
-                    <FaShareSquare size={18} />
                     <FaShareSquare size={18} />
                   </button>
                 </div>
