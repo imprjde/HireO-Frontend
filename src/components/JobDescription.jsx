@@ -390,7 +390,7 @@
 // export default JobDescription;
 
 ///////////////////////////////// NAVIGATOR SHARE //////////////////////////////////////////
-
+import { Helmet } from "react-helmet";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
@@ -560,6 +560,31 @@ const JobDescription = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>{singleJobById?.title || "Job Description"}</title>
+        <meta
+          name="description"
+          content={`Find out more about the job titled "${
+            singleJobById?.title || ""
+          }" at HierO.`}
+        />
+        <meta
+          property="og:title"
+          content={singleJobById?.title || "HierO Job Posting"}
+        />
+        <meta
+          property="og:description"
+          content={`Find out more about the job titled "${
+            singleJobById?.title || ""
+          }" at HierO.`}
+        />
+        <meta
+          property="og:image"
+          content={singleJobById?.company?.logo || "default-image-url.jpg"}
+        />
+        <meta property="og:url" content={window?.location?.href} />
+        <meta property="og:type" content="website" />
+      </Helmet>
       {isApplying && <ApplyJobLoader />}
       <AnimatePresence>
         {showModal && (
