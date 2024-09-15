@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { GoDotFill } from "react-icons/go";
 import { setNotificationDetails } from "@/redux/notificationSlice";
-import HireoLogo from "../../src/assets/HireOLogo.png";
+import HireoLogo from "../../src/assets/notify-dp.png";
 
 export default function Notification({ notification }) {
   const { authUser } = useSelector((store) => store.auth);

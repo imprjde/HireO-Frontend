@@ -77,11 +77,17 @@ import InfiniteLoader from "./loaders/InfiniteLoader";
 import { useEffect } from "react";
 
 const LatestJobs = () => {
-  const { data: allJobs, loadMoreJobs, hasMore } = useGetAllJobs();
+  const { data: allJobs, loadMoreJobs, hasMore, status } = useGetAllJobs();
+
+  // const endMessage = (
+  //   <p className="text-lg font-semibold text-gray-200 fo pt-5 text-center">
+  //     No More Jobs To Display!
+  //   </p>
+  // );
 
   const endMessage = (
     <p className="text-lg font-semibold text-gray-200 fo pt-5 text-center">
-      No More Jobs To Display!
+      {status === "pending" ? <InfiniteLoader /> : "No More Jobs To Display!"}
     </p>
   );
 
@@ -103,6 +109,7 @@ const LatestJobs = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   return (
     <div className="max-w-7xl md:mx-auto mx-3 pb-20 overflow-x-hidden mt-12 md:mt-16 m-auto justify-center flex flex-col">
       <h1 className="text-2xl md:text-4xl font-bold">

@@ -7,7 +7,6 @@ import ApplicationTable from "./ApplicationTable";
 import { useSelector } from "react-redux";
 import { UpdateProfileDialog } from "./UpdateProfileDialog";
 import { useNavigate } from "react-router-dom";
-// import useGetAppliedJobs from "@/hooks/useGetAppliedJobs";
 import { Label } from "./ui/label";
 import { FaPen } from "react-icons/fa";
 import BottomNav from "./shared/BottomNav";
@@ -16,7 +15,6 @@ import { toast } from "sonner";
 import useTokenExpirationCheck from "@/hooks/useTokenExpirationCheck";
 
 const Profile = () => {
-  // useGetAppliedJobs();
   useTokenExpirationCheck();
   const [open, setOpen] = useState(false);
   const { authUser } = useSelector((store) => store.auth);

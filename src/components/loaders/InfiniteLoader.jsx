@@ -23,7 +23,7 @@
 
 export default function InfiniteLoader() {
   return (
-    <div role="status" className="justify-center pt-10 flex overflow-hidden">
+    <span role="status" className="justify-center pt-10 flex overflow-hidden">
       <svg
         aria-hidden="true"
         className="w-10 h-10 text-gray-900 animate-spin dark:text-gray-600 fill-white"
@@ -40,6 +40,6 @@ export default function InfiniteLoader() {
           fill="currentFill"
         />
       </svg>
-    </div>
+    </span>
   );
 }
