@@ -86,7 +86,6 @@ const LatestJobs = () => {
   );
 
   useEffect(() => {
-    // Scroll to the saved position when the component mounts
     const savedScrollPosition = sessionStorage.getItem(
       "latestJobsScrollPosition"
     );
@@ -94,14 +93,12 @@ const LatestJobs = () => {
       window.scrollTo(0, parseInt(savedScrollPosition, 10));
     }
 
-    // Save the current scroll position before the component unmounts
     const handleScroll = () => {
       sessionStorage.setItem("latestJobsScrollPosition", window.scrollY);
     };
 
     window.addEventListener("scroll", handleScroll);
 
-    // Cleanup the event listener on unmount
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };

@@ -176,6 +176,7 @@ import axios from "axios";
 export default function BottomNav() {
   const { authUser } = useSelector((store) => store.auth);
   const { isRotated } = useSelector((store) => store.notification);
+
   const { unseenNotificationCount } = useSelector(
     (store) => store.notification
   );
@@ -192,7 +193,6 @@ export default function BottomNav() {
         }
       );
 
-      // console.log("RETURN:", data);
       dispatch(setUnseenNotificationCount(data.data));
 
       return data?.data;
@@ -211,10 +211,10 @@ export default function BottomNav() {
   });
 
   const scrollToTop = () => {
-    // window.scrollTo({
-    //   top: 0,
-    //   behavior: "smooth",
-    // });
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (

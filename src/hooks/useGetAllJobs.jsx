@@ -48,8 +48,6 @@
 
 // export default useGetAllJobs;
 
-
-
 //////////////////////////////  MORE TSQ OPTIMIZATION //////////////////////////////////////////////////
 import axios from "axios";
 import { useInfiniteQuery } from "@tanstack/react-query";

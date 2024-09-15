@@ -558,6 +558,7 @@ const JobDescription = () => {
       console.log("Share feature unavailable for your browser.");
     }
   };
+
   return (
     <>
       <Helmet>
@@ -578,10 +579,7 @@ const JobDescription = () => {
             singleJobById?.title || ""
           }" at HierO.`}
         />
-        <meta
-          property="og:image"
-          content={singleJobById?.company?.logo || "default-image-url.jpg"}
-        />
+        <meta property="og:image" content={singleJobById?.company?.logo} />
         <meta property="og:url" content={window?.location?.href} />
         <meta property="og:type" content="website" />
       </Helmet>
