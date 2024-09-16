@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import useClickOutside from "@/helpers/useClickOutside";
 import { setClearSavedJobs } from "@/redux/jobSlice";
 import { setAllNotifications } from "@/redux/notificationSlice";
+import { setAllAppliedJobs } from "@/redux/applicationSlice";
 
 export default function LogoutConfirmation({ setShowModal }) {
   const modalRef = useClickOutside(() => setShowModal(false));
@@ -28,6 +29,7 @@ export default function LogoutConfirmation({ setShowModal }) {
         dispatch(setAuthUser(null));
         dispatch(setClearSavedJobs([]));
         dispatch(setAllNotifications([]));
+        dispatch(setAllAppliedJobs([]));
         setShowModal(false);
         navigate("/");
         toast.success(res.data.message);

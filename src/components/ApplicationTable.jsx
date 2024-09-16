@@ -144,7 +144,7 @@ import { useSelector } from "react-redux";
 
 const ApplicationTable = () => {
   const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(false);
   const { allAppliedJobs } = useSelector((store) => store.application);
   const { isLoading, isError } = useGetAppliedJobs(page, setHasMore);
 
@@ -173,7 +173,7 @@ const ApplicationTable = () => {
     <>
       <div className="flex bg-red- m-auto items-start justify-between p-5">
         <h1 className="text-lg md:text-xl font-bold items-center">
-          Applied Jobs
+          Applied Jobsss
         </h1>
       </div>
 

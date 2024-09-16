@@ -412,7 +412,6 @@ const JobDescription = () => {
   const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isApplying, setIsApplying] = useState(false);
-
   const isInitiallyApplied =
     singleJobById?.applications?.some(
       (application) => application.applicant === authUser?._id

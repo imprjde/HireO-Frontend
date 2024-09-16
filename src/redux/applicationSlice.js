@@ -19,15 +19,17 @@ const applicationSlice = createSlice({
       state.allAppliedJobs = action.payload;
     },
     addAppliedJobs(state, action) {
+      console.log(action.payload);
       state.allAppliedJobs.push(...action.payload);
     },
     setAllApplicants: (state, action) => {
       state.applicants = action.payload;
-      console.log("Console 1=", state.applicants);
     },
+
     setIsFetchingAppliedJob: (state, action) => {
       state.isFetchingAppliedJobs = action.payload;
     },
+
     setIsFetchingApplicants: (state, action) => {
       state.isFetchingApplicants = action.payload;
     },
