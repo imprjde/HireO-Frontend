@@ -131,11 +131,8 @@ const Jobs = () => {
         <div className="flex gap-5">
           <AnimatePresence>
             {!showFilter && (
-              <motion.div
+              <div
                 onClick={() => setShowFilter(true)}
-                // initial={{ scale: 0 }}
-                // animate={{ scale: 1 }}
-                // transition={{ duration: 0.5, type: "spring", stiffness: 200 }}
                 className="floating-filter-button fixed bottom-[72px] md:hidden right-4 z-40"
               >
                 <button className="flex border-[1.5px]    border-gray-600 space-x-1 items-center bg-gradient-to-r from-purple-700 to-gray-900 hover:from-gray-900 hover:to-purple-700 text-white font-semibold text-sm py-1.5 px-4 rounded-full ">
@@ -153,7 +150,7 @@ const Jobs = () => {
                     </svg>
                   </span>
                 </button>
-              </motion.div>
+              </div>
             )}
           </AnimatePresence>
           <div className="hidden md:flex min-w-[20%] pt-7">

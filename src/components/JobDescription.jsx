@@ -1,3 +1,4 @@
+// import { Helmet } from "react-helmet";
 // import { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { toast } from "sonner";
@@ -10,19 +11,16 @@
 // import CompanyInfoModal from "./CompanyInfoModal";
 // import { FaCheckCircle } from "react-icons/fa";
 // import ApplyJobLoader from "./loaders/ApplyJobLoader";
-// import ShareJobModal from "./ShareJobModal";
 // import { AnimatePresence } from "framer-motion";
 
 // const JobDescription = () => {
-//   const { singleJobById } = useSelector((store) => store.job);
-//   const { savedJobs } = useSelector((store) => store.job);
+//   const { singleJobById, savedJobs } = useSelector((store) => store.job);
 //   const { authUser } = useSelector((store) => store.auth);
 //   const [showModal, setShowModal] = useState(false);
 //   const [isLoading, setIsLoading] = useState(false);
 //   const [isApplying, setIsApplying] = useState(false);
-//   const [showShareModal, setShowShareModal] = useState(false);
-//   const [link, setLink] = useState(null);
 
+//   console.log("singleJobById::",singleJobById)
 //   const isInitiallyApplied =
 //     singleJobById?.applications?.some(
 //       (application) => application.applicant === authUser?._id
@@ -147,26 +145,52 @@
 //     // eslint-disable-next-line react-hooks/exhaustive-deps
 //   }, [savedJobs, singleJobById?._id]);
 
-//   const handleShare = () => {
-//     setShowShareModal(true);
-//     setLink(window?.location?.href);
-//   };
-
 //   const randomApplicantNumber = () => {
 //     return Math.floor(Math.random() * (200 - 100 + 1)) + 100;
 //   };
 
+//   const handleNavigatorShare = async () => {
+//     const shareDetails = {
+//       title: "Check out this New Job Posting on HierO !",
+//       text: "Check out this New Job Posting on HierO !",
+//       url: window?.location?.href,
+//     };
+
+//     if (navigator.share) {
+//       try {
+//         await navigator.share(shareDetails);
+//       } catch (error) {
+//         return;
+//       }
+//     } else {
+//       console.log("Share feature unavailable for your browser.");
+//     }
+//   };
+
 //   return (
 //     <>
-//       <AnimatePresence>
-//         {showShareModal && (
-//           <ShareJobModal
-//             link={link}
-//             setLink={setLink}
-//             setShowShareModal={setShowShareModal}
-//           />
-//         )}
-//       </AnimatePresence>
+//       <Helmet>
+//         <title>{singleJobById?.title || "Job Description"}</title>
+//         <meta
+//           name="description"
+//           content={`Find out more about the job titled "${
+//             singleJobById?.title || ""
+//           }" at HierO.`}
+//         />
+//         <meta
+//           property="og:title"
+//           content={singleJobById?.title || "HierO Job Posting"}
+//         />
+//         <meta
+//           property="og:description"
+//           content={`Find out more about the job titled "${
+//             singleJobById?.title || ""
+//           }" at HierO.`}
+//         />
+//         <meta property="og:image" content={singleJobById?.company?.logo} />
+//         <meta property="og:url" content={window?.location?.href} />
+//         <meta property="og:type" content="website" />
+//       </Helmet>
 //       {isApplying && <ApplyJobLoader />}
 //       <AnimatePresence>
 //         {showModal && (
@@ -195,7 +219,7 @@
 //                 </h2>
 //                 <div className="flex w-12 items-center justify-end">
 //                   <button
-//                     onClick={handleShare}
+//                     onClick={handleNavigatorShare}
 //                     className="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-transparent text-[#FFFFFF] gap-2 text-base font-bold leading-normal tracking-[0.015em] min-w-0 p-0"
 //                   >
 //                     <FaShareSquare size={18} />
@@ -382,14 +406,14 @@
 //           </div>
 //         </>
 //       )}
-//       {/* <BottomNav /> */}
 //     </>
 //   );
 // };
 
 // export default JobDescription;
 
-///////////////////////////////// NAVIGATOR SHARE //////////////////////////////////////////
+///////////////////// RANDOM APPLICANTS /////////////////////////////////////////////////
+
 import { Helmet } from "react-helmet";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -406,12 +430,12 @@ import ApplyJobLoader from "./loaders/ApplyJobLoader";
 import { AnimatePresence } from "framer-motion";
 
 const JobDescription = () => {
-  const { singleJobById } = useSelector((store) => store.job);
-  const { savedJobs } = useSelector((store) => store.job);
+  const { singleJobById, savedJobs } = useSelector((store) => store.job);
   const { authUser } = useSelector((store) => store.auth);
   const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isApplying, setIsApplying] = useState(false);
+
   const isInitiallyApplied =
     singleJobById?.applications?.some(
       (application) => application.applicant === authUser?._id
@@ -449,6 +473,7 @@ const JobDescription = () => {
           setIsApplying(false);
           const updatedJob = {
             ...singleJobById,
+            dummyApplicants: singleJobById?.dummyApplicants + 1,
             applications: [
               ...singleJobById.applications,
               { applicant: authUser._id },
@@ -535,10 +560,6 @@ const JobDescription = () => {
     setIsSaved(isAlreadySaved());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [savedJobs, singleJobById?._id]);
-
-  const randomApplicantNumber = () => {
-    return Math.floor(Math.random() * (200 - 100 + 1)) + 100;
-  };
 
   const handleNavigatorShare = async () => {
     const shareDetails = {
@@ -729,10 +750,14 @@ const JobDescription = () => {
                   <p className="text-[#ABABAB] text-sm font-normal leading-normal">
                     Total Applicants
                   </p>
+                  {/* <p className="text-[#FFFFFF] text-sm font-normal leading-normal">
+                    {singleJobById?.applications?.length}
+                  </p> */}
+
                   <p className="text-[#FFFFFF] text-sm font-normal leading-normal">
-                    {singleJobById?.applications?.length < 10
-                      ? randomApplicantNumber()
-                      : singleJobById?.applications?.length}
+                    {singleJobById?.applications?.length > 20
+                      ? singleJobById?.applications?.length
+                      : singleJobById?.dummyApplicants}
                   </p>
                 </div>
                 <div className="col-span-2 grid grid-cols-subgrid border-t border-t-[#303030] py-5">
