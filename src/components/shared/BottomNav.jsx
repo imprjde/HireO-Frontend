@@ -297,7 +297,7 @@ export default function BottomNav() {
                 {authUser?.profile?.profilePhoto ? (
                   <img
                     className={`w-6 h-6 border-2 rounded-full object-cover ${
-                      isActive ? "border-purple-600" : "border-white"
+                      isActive ? "border-purple-900" : "border-white"
                     }`}
                     src={authUser?.profile?.profilePhoto}
                     alt="Profile Picture"
@@ -305,7 +305,7 @@ export default function BottomNav() {
                 ) : (
                   <img
                     className={`w-6 h-6 border-2 rounded-full object-cover ${
-                      isActive ? "border-purple-600" : "border-purple-400"
+                      isActive ? "border-purple-600" : "border-white"
                     }`}
                     src={Default}
                     alt="Default Profile Picture"

@@ -173,7 +173,7 @@ const ApplicationTable = () => {
     <>
       <div className="flex bg-red- m-auto items-start justify-between p-5">
         <h1 className="text-lg md:text-xl font-bold items-center">
-          Applied Jobsss
+          Applied Jobs
         </h1>
       </div>
 
@@ -234,10 +234,10 @@ const ApplicationTable = () => {
                       <Badge
                         className={`${
                           appliedjob?.status === "rejected"
-                            ? "bg-red-600"
+                            ? "bg-red-600 hover:bg-red-600"
                             : appliedjob?.status === "pending"
-                            ? "bg-gray-600"
-                            : "bg-green-600"
+                            ? "bg-gray-600 hover:bg-gray-600"
+                            : "bg-green-600 hover:bg-green-600"
                         }`}
                       >
                         {appliedjob?.status?.toUpperCase()}

@@ -219,7 +219,6 @@ function NotificationPage() {
   const navigate = useNavigate();
 
   const fetchNotifications = async () => {
-    console.log("FETCH NOTIFCATION FN RUNNING>>>");
     try {
       dispatch(setIsFetchingNotifications(true));
       const { data } = await axios.get(
@@ -228,7 +227,6 @@ function NotificationPage() {
           params: { userId: authUser?._id },
         }
       );
-      console.log("FETCH NOTIFCATION::", data.data);
       dispatch(setAllNotifications(data.data));
       dispatch(setUnseenNotificationCount(0));
       dispatch(setIsFetchingNotifications(false));
@@ -243,13 +241,14 @@ function NotificationPage() {
     if (
       allNotifications.some((notification) => notification.hasSeen === false)
     ) {
-      console.log("UPDATE NOTIFCATION FN RUNNING>>>");
       try {
-        let resp = await axios.put(
+        await axios.put(
           `${import.meta.env.VITE_BASE_URL}/notification/update-notification`,
-          { userId: authUser?._id }
+          { userId: authUser?._id },
+          {
+            withCredentials: true,
+          }
         );
-        console.log("UPDATE NOTIFCATION::", resp.data);
       } catch (error) {
         console.log("Failed to update notifications:", error);
       }
