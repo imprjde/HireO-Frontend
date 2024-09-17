@@ -82,6 +82,7 @@ import Animation from "./animation/Animation";
 import { AnimatePresence, motion } from "framer-motion";
 import useTokenExpirationCheck from "@/hooks/useTokenExpirationCheck";
 import useHasAnimated from "@/hooks/useHasAnimated";
+import MoveToTop from "./MoveToTop";
 
 const Home = () => {
   useTokenExpirationCheck();
@@ -111,6 +112,7 @@ const Home = () => {
               <LoadingBar color="#FFFFFF" height={4} progress={progress} />
               <HeroSection setProgress={setProgress} />
               <Carousel setProgress={setProgress} />
+              <MoveToTop />
               <LatestJobs />
               <BottomNav />
             </motion.div>

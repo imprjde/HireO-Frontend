@@ -26,11 +26,9 @@ export default function NotificationModal({
 
   useEffect(() => {
     const fetchNotifications = async () => {
-      console.log("FETCH NOTIFICATION FUNCTION RUNNING");
       try {
         dispatch(setIsFetchingNotifications(true));
         let resp = await axios.get(
-          // `http://localhost:8000/api/v1/notification/get-notification`,
           `${import.meta.env.VITE_BASE_URL}/notification/get-notification`,
           {
             params: { userId: authUser?._id },
@@ -41,10 +39,6 @@ export default function NotificationModal({
           dispatch(setAllNotifications(resp?.data?.data));
           dispatch(setIsFetchingNotifications(false));
           dispatch(setUnseenNotificationCount(0));
-          console.log(
-            "Notifications Fetched Successfully from Noti page",
-            resp.data.data
-          );
         }
       } catch (error) {
         dispatch(setIsFetchingNotifications(false));
@@ -56,15 +50,16 @@ export default function NotificationModal({
       fetchNotifications();
     }
 
-    // Below Fuction Updates the hasSeen filed of notification on the databse while user leaves this page
     return () => {
       const updateNotifications = async () => {
         try {
           await axios.put(
-            // `http://localhost:8000/api/v1/notification/update-notification`,
             `${import.meta.env.VITE_BASE_URL}/notification/update-notification`,
             {
               userId: authUser?._id,
+            },
+            {
+              withCredentials: true,
             }
           );
         } catch (error) {
@@ -125,9 +120,11 @@ export default function NotificationModal({
                 })}
             </div>
 
-            {/* <div className="bg-red-5 m-auto  text-lg font-serif flex justify-center h-[300px] items-center">
-              <span>No new notifications available!</span>
-            </div> */}
+            {!isFetchingNotifications && !allNotifications && (
+              <div className="bg-red-5 m-auto  text-lg font-serif flex justify-center h-[300px] items-center">
+                <span>No new notifications available!</span>
+              </div>
+            )}
           </div>
         </div>
       </div>
