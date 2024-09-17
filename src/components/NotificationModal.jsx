@@ -102,7 +102,7 @@ export default function NotificationModal({
                 onClick={() => setShowNotificationModal(false)}
                 className="text-lg px-4 pt-4 font-bold text-white"
               >
-                <IoClose size={22} className="text-rose-500 cursor-pointer" />
+                <IoClose size={22} className="text-white cursor-pointer" />
               </span>
             </div>
             <div className="mt-5 px-4">
