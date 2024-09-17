@@ -1,32 +1,70 @@
-.underline-rounded {
-  position: relative; /* Ensure the pseudo-element is positioned relative to its container */
+/* .underline-rounded {
+  position: relative;
 }
 
 .underline-rounded::after {
   content: "";
   display: block;
   width: 100%;
-  height: 4px; /* Thickness of the underline */
-  background: linear-gradient(
-    to left,
-    #d0caca,
-    #a202ff
-  ); /* Gradient with three colors */
-  border-radius: 9999px; /* Fully rounded corners */
+  height: 4px;
+  background: linear-gradient(to left, #d0caca, #a202ff);
+  border-radius: 9999px;
   position: absolute;
   bottom: 0;
   left: 0;
 }
 
 .text-gradient {
-  background: linear-gradient(
-    to left,
-    #d0caca,
-    #a202ff
-  ); /* Gradient colors */
+  background: linear-gradient(to left, #d0caca, #a202ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: bolder;
   background-clip: text;
-  color: transparent; /* Fallback for browsers that do not support gradient text */
+  color: transparent;
+} */
+
+/* //////////////////////////////////////////////////////////////////////  */
+/* .nav-link {
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #ff6b6b;
+}
+
+.active-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background-color: #ff6b6b;
+  border-radius: 2px;
+}
+
+.active {
+  color: #ff6b6b;
+} */
+
+/* //////////////////////////////////////////////////////////////////////  */
+.nav-link {
+  position: relative;
+  color: white;
+}
+
+.nav-link button {
+  position: relative;
+}
+
+.nav-link button:hover {
+  color: white;
+}
+
+.active-indicator {
+  position: absolute;
+  inset: 0;
+  background-color: white;
+  z-index: -1; /* Pushes it behind the text */
+  border-radius: 9999px;
 }

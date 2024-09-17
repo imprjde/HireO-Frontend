@@ -61,7 +61,6 @@ const Jobs = () => {
     const { data } = await axios.get(
       `${import.meta.env.VITE_BASE_URL}/job/filterJobs?${query}`
     );
-    // setHAsAnimated(false);
     return data?.jobs;
   };
 
@@ -69,7 +68,6 @@ const Jobs = () => {
     queryKey: ["filteredJobs", filterObject],
     queryFn: fetchJobs,
     keepPreviousData: true,
-    // staleTime: 10 * 60 * 1000, // 10 mins
     staleTime: Infinity,
   });
   const handleOnboardedUpdate = async () => {
