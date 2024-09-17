@@ -30,7 +30,7 @@ export default function MoveToTop() {
           exit={{ opacity: 0 }}
           transition={{ duration: 1 }}
           onClick={scrollToTop}
-          className="bg-purple-700 fixed bottom-10 p-3 bg-opacity-70 b border-sky-400 z-50 cursor-pointer rounded-full right-8"
+          className="bg-purple-700 hidden md:block fixed bottom-10 p-3 bg-opacity-70 b border-sky-400 z-50 cursor-pointer rounded-full right-8"
         >
           <span className="text-white">
             <IoIosArrowUp size={25} />

@@ -386,7 +386,7 @@ const Signup = () => {
 
   return (
     <>
-      <div className="flex max-h-screen text-white items-center pt-12 md:pt-0 justify-center max-w-7xl mx-auto">
+      <div className="flex max-h-screen text-white items-center pt-36 md:pt-16 justify-center max-w-7xl mx-auto">
         <form
           onSubmit={submitHandler}
           className="md:w-1/2 w-[90%] rounded-md p-4 my-10"
@@ -446,7 +446,7 @@ const Signup = () => {
               </>
             )}
           </div> */}
-          <div className="my-4">
+          <div className="my-6">
             <input
               type="text"
               value={input.fullname}
@@ -476,7 +476,7 @@ const Signup = () => {
               className="bg-zinc-700 text-sm md:text-md w-full placeholder:tracking-wide placeholder:text-gray-300 rounded-sm h-[44px] outline-none border-none pl-3 pr-10"
             />
           </div> */}
-          <div className="relative my-2">
+          <div className="relative mt-6 mb-2">
             <input
               type={showPassword ? "text" : "password"}
               name="password"
