@@ -16,6 +16,7 @@ export function ProfilePopover({ setShowModal }) {
   const [open, setOpen] = useState(false);
 
   const { authUser } = useSelector((store) => store.auth);
+  console.log("authUser:", authUser);
 
   return (
     <Popover open={open}>
@@ -41,11 +42,13 @@ export function ProfilePopover({ setShowModal }) {
             </Avatar>
             <div className="space-y-1">
               <h4 className="font-medium leading-none">{authUser?.fullname}</h4>
-              {authUser && authUser?.role === "student" && (
-                <p className="text-sm text-white text-muted-foreground">
-                  {authUser?.profile?.bio?.slice(0, 63)} ...
-                </p>
-              )}
+              {authUser &&
+                authUser?.role === "student" &&
+                authUser?.profile?.bio && (
+                  <p className="text-sm text-white text-muted-foreground">
+                    {authUser?.profile?.bio?.slice(0, 63)} ...
+                  </p>
+                )}
               {authUser && authUser?.role === "recruiter" && (
                 <p className=" text-white text-muted- font-semibold text-xs">
                   Admin

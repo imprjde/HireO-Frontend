@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Navbar from "./shared/Navbar";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { Badge } from "./ui/badge";
-import { Contact, Mail } from "lucide-react";
+import {
+  //  Contact,
+  Mail,
+} from "lucide-react";
 import ApplicationTable from "./ApplicationTable";
 import { useSelector } from "react-redux";
 import { UpdateProfileDialog } from "./UpdateProfileDialog";
@@ -13,11 +16,13 @@ import BottomNav from "./shared/BottomNav";
 import defaultProfilePic from "../../src/assets/default.jpg";
 import { toast } from "sonner";
 import useTokenExpirationCheck from "@/hooks/useTokenExpirationCheck";
+import { FaPhone } from "react-icons/fa6";
 
 const Profile = () => {
   useTokenExpirationCheck();
   const [open, setOpen] = useState(false);
   const { authUser } = useSelector((store) => store.auth);
+  const bioRef = useRef();
 
   const navigate = useNavigate();
   // protect route
@@ -29,6 +34,13 @@ const Profile = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleBio = () => {
+    setOpen(true);
+    setTimeout(() => {
+      bioRef?.current?.focus();
+    }, 100);
+  };
 
   return (
     <div className="pb-20">
@@ -64,23 +76,34 @@ const Profile = () => {
               <h1 className="font-semibold text-lg md:text-xl">
                 {authUser?.fullname}
               </h1>
-              <p className="font-medium ">{`${
-                authUser?.profile?.bio
-                  ? authUser?.profile?.bio
-                  : "Add your bio here"
-              }`}</p>
+              <p className="font-medium ">
+                {authUser?.profile?.bio ? (
+                  <span>{authUser?.profile?.bio}</span>
+                ) : (
+                  <span className="cursor-pointer" onClick={handleBio}>
+                    {" "}
+                    Add your bio here
+                  </span>
+                )}
+              </p>
             </div>
           </div>
         </div>
         <div className="my-5">
           <div className="flex items-center gap-3 my-2">
             <Mail className="h-4 w-4" />
+
             <span className="text-sm md:text-base">{authUser?.email}</span>
           </div>
           <div className="flex items-center gap-3 my-2">
-            <Contact className="h-4 w-4" />
+            {/* <Contact className="h-4 w-4" /> */}
+            <FaPhone size={15} />
             <span className="text-sm md:text-base">
-              {authUser?.phoneNumber}
+              {authUser?.phoneNumber ? (
+                <>{authUser?.phoneNumber}</>
+              ) : (
+                <span>NA</span>
+              )}
             </span>
           </div>
         </div>
@@ -117,7 +140,7 @@ const Profile = () => {
       <div className="max-w-4xl  shadow-lg border border-x-fuchsia-400 border-t-fuchsia-400 border-b-0 shadow-fuchsia-400 mx-3 text-white bg-gray-950 md:mx-auto rounded-2xl">
         <ApplicationTable />
       </div>
-      <UpdateProfileDialog open={open} setOpen={setOpen} />
+      <UpdateProfileDialog bioRef={bioRef} open={open} setOpen={setOpen} />
       <BottomNav />
     </div>
   );

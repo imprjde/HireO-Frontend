@@ -309,7 +309,7 @@ let loader = (
   <div className="w-5 h-5 border-4 border-t-4 border-gray-800 border-t-transparent rounded-full animate-spin"></div>
 );
 
-export function UpdateProfileDialog({ open, setOpen }) {
+export function UpdateProfileDialog({ open, setOpen, bioRef }) {
   const { authUser } = useSelector((store) => store.auth);
   const [isLoading, setIsLoading] = useState(false);
   const [input, setInput] = useState({
@@ -384,7 +384,6 @@ export function UpdateProfileDialog({ open, setOpen }) {
       dispatch(setLoading(true));
       axios.defaults.withCredentials = true;
       const res = await axios.post(
-        // "http://localhost:8000/api/v1/user/profile/update",
         `${import.meta.env.VITE_BASE_URL}/user/profile/update`,
         formData,
         {
@@ -526,6 +525,7 @@ export function UpdateProfileDialog({ open, setOpen }) {
               </Label>
               <Input
                 id="bio"
+                ref={bioRef}
                 value={input.bio}
                 type="string"
                 name="bio"
