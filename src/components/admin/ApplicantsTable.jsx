@@ -448,7 +448,13 @@ const ApplicantsTable = () => {
                   >
                     <TableCell>{item?.applicant?.fullname}</TableCell>
                     <TableCell>{item?.applicant?.email}</TableCell>
-                    <TableCell>{item?.applicant?.phoneNumber}</TableCell>
+                    <TableCell>
+                      {item?.applicant?.phoneNumber ? (
+                        item?.applicant?.phoneNumber
+                      ) : (
+                        <>NA</>
+                      )}
+                    </TableCell>
                     <TableCell className="text-blue-600 cursor-pointer">
                       {item?.applicant?.profile?.resume ? (
                         <a
