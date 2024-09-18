@@ -389,10 +389,10 @@ const Signup = () => {
   return (
     <div className="overflow-x-hidden">
       <motion.div
-        initial={{ x: "30vw", opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        exit={{ x: "-30vw", opacity: 0 }}
-        transition={{ type: "smooth", duration: 0.5 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ type: "smooth", duration: 1 }}
         className="flex max-h-screen text-white items-center pt-36 md:pt-16 justify-center max-w-7xl mx-auto"
       >
         <form

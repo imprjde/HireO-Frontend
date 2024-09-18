@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -17,7 +18,6 @@ export default function ForgotPassword() {
     try {
       setIsLoading(true);
       let resp = await axios.post(
-        // "http://localhost:8000/api/v1/user/get-link",
         `${import.meta.env.VITE_BASE_URL}/user/get-link`,
         {
           email,
@@ -37,7 +37,13 @@ export default function ForgotPassword() {
     }
   };
   return (
-    <div className="text-white">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ type: "smooth", duration: 1 }}
+      className="text-white"
+    >
       <div className="flex md:h-screen  flex-col m-auto pt-64 md:pt-0 items-center justify-center md:max-w-7xl mx-auto">
         <form
           onSubmit={handleSendEmail}
@@ -72,6 +78,6 @@ export default function ForgotPassword() {
           </Button>
         </form>
       </div>
-    </div>
+    </motion.div>
   );
 }
