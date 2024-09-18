@@ -298,6 +298,8 @@ import { setAuthUser, setLoading } from "@/redux/authSlice";
 import { Loader2 } from "lucide-react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import HireOLogo from "../../../src/assets/HireO.svg";
+import { motion } from "framer-motion";
+
 // import Default from "../../../src/assets/default.jpg";
 
 const Signup = () => {
@@ -385,8 +387,14 @@ const Signup = () => {
   }, []);
 
   return (
-    <>
-      <div className="flex max-h-screen text-white items-center pt-36 md:pt-16 justify-center max-w-7xl mx-auto">
+    <div className="overflow-x-hidden">
+      <motion.div
+        initial={{ x: "30vw", opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        exit={{ x: "-30vw", opacity: 0 }}
+        transition={{ type: "smooth", duration: 0.5 }}
+        className="flex max-h-screen text-white items-center pt-36 md:pt-16 justify-center max-w-7xl mx-auto"
+      >
         <form
           onSubmit={submitHandler}
           className="md:w-1/2 w-[90%] rounded-md p-4 my-10"
@@ -557,8 +565,8 @@ const Signup = () => {
             </Link>
           </span>
         </form>
-      </div>
-    </>
+      </motion.div>
+    </div>
   );
 };
 
