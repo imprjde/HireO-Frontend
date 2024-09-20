@@ -22,10 +22,11 @@
 // import ForgotPassword from "./components/ForgotPassword";
 // import Notification from "./components/NotificationPage";
 // import ViewNotification from "./components/ViewNotification";
-// import { useEffect } from "react";
-// import { useSelector } from "react-redux";
-// import Animation from "./components/animation/Animation";
+// // import { useEffect } from "react";
+// // import { useSelector } from "react-redux";
+// // import Animation from "./components/animation/Animation";
 // import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+// // import { useEffect } from "react";
 // // import { reqNotifyPermission } from "./helpers/reqNotifyPermission";
 
 // const appRouter = createBrowserRouter([
@@ -135,7 +136,9 @@
 // ]);
 
 // function App() {
-//   const { authUser } = useSelector((store) => store.auth);
+//   // const { authUser } = useSelector((store) => store.auth);
+
+//   // const dispatch = useDispatch();
 
 //   // useEffect(() => {
 //   //   const requestNotificationPermission = async () => {
@@ -156,11 +159,14 @@
 
 //   // useEffect(() => {
 //   //   if (authUser && authUser?._id) {
-//   //     reqNotifyPermission(authUser?._id);
+//   //     reqNotifyPermission(authUser?._id, dispatch);
 //   //   }
-//   // }, [authUser]);
+//   // }, []);
+
+//   //checking whether cookie is expired or not
 
 //   const queryClient = new QueryClient();
+
 //   return (
 //     <div className="bg-gradient-to-b min-h-screen bg-black">
 //       <QueryClientProvider client={queryClient}>
@@ -178,7 +184,7 @@
 
 // export default App;
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////// PN FEATURE //////////////////////////////////////////////////////////////////////
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
@@ -205,11 +211,12 @@ import ForgotPassword from "./components/ForgotPassword";
 import Notification from "./components/NotificationPage";
 import ViewNotification from "./components/ViewNotification";
 // import { useEffect } from "react";
-// import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import Animation from "./components/animation/Animation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // import { useEffect } from "react";
-// import { reqNotifyPermission } from "./helpers/reqNotifyPermission";
+import { reqNotifyPermission } from "./helpers/reqNotifyPermission";
+import { useEffect } from "react";
 
 const appRouter = createBrowserRouter([
   {
@@ -318,34 +325,25 @@ const appRouter = createBrowserRouter([
 ]);
 
 function App() {
-  // const { authUser } = useSelector((store) => store.auth);
+  const { authUser } = useSelector((store) => store.auth);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   const requestNotificationPermission = async () => {
-  //     console.log("requestNotificationPermission FN RUNNING");
-  //     const permission = await window.Notification.requestPermission();
-  //     if (permission === "granted") {
-  //       const token = await getToken(messaging, {
-  //         vapidKey:
-  //           "BBN_wOv4FUfbUGbsau251mWz050ZDyUe73CD_EFgN9kFEA4uUl-aIdTGQrbud9HXIeJ4k20pj7KCW9CW2r-WD8M",
-  //       });
-  //       console.log("Token Generated=", token);
-  //     } else if (permission === "denied") {
-  //       alert("You won't receive any notification from HireO");
-  //     }
-  //   };
-  //   requestNotificationPermission();
-  // }, []);
-
-  // useEffect(() => {
-  //   if (authUser && authUser?._id) {
-  //     reqNotifyPermission(authUser?._id, dispatch);
-  //   }
-  // }, []);
-
-  //checking whether cookie is expired or not
+  // console.log("authUser:=", authUser);
+  useEffect(() => {
+    if (
+      authUser &&
+      authUser?._id &&
+      authUser?.role === "student"
+      //  &&     !authUser?.isFcmPosted
+    ) {
+      console.warn("UseEffect for Permission Running");
+      reqNotifyPermission(authUser?._id, dispatch);
+    } else {
+      console.error("reqNotifyPermission Won't run");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authUser?._id]);
 
   const queryClient = new QueryClient();
 
@@ -365,7 +363,3 @@ function App() {
 }
 
 export default App;
-
-// L17778BPPJF9V8NJ6CJ3D5YT
-
-// secive ID : VA4672d76cc7aabec4517ab7ab0be94b83

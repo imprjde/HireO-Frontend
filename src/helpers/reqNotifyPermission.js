@@ -130,50 +130,52 @@
 
 // //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// import axios from "axios";
-// import { messaging } from "../firebase/firebase";
-// import { getToken } from "firebase/messaging";
-// import { setAuthUser } from "@/redux/authSlice";
+import axios from "axios";
+import { messaging } from "../firebase/firebase";
+import { getToken } from "firebase/messaging";
+import { setAuthUser } from "@/redux/authSlice";
 
-// export const reqNotifyPermission = async (userId, dispatch) => {
-//   let permission = await Notification.requestPermission();
+export const reqNotifyPermission = async (userId, dispatch) => {
+  let permission = await Notification.requestPermission();
 
-//   while (permission === "default") {
-//     console.log("DEFAULT BLOCK RUNNING");
-//     permission = await Notification.requestPermission();
-//     console.log(
-//       "User has not yet responded to the permission request. Please wait..."
-//     );
-//   }
+  while (permission === "default") {
+    console.log("DEFAULT BLOCK RUNNING");
+    permission = await Notification.requestPermission();
+    console.log(
+      "User has not yet responded to the permission request. Please wait..."
+    );
+  }
 
-//   if (permission === "granted") {
-//     console.log("GRANTED BLOCK RUNNING");
+  if (permission === "granted") {
+    console.log("GRANTED BLOCK RUNNING");
 
-//     try {
-//       const token = await getToken(messaging, {
-//         vapidKey:
-//           "BBN_wOv4FUfbUGbsau251mWz050ZDyUe73CD_EFgN9kFEA4uUl-aIdTGQrbud9HXIeJ4k20pj7KCW9CW2r-WD8M",
-//       });
+    try {
+      const token = await getToken(messaging, {
+        vapidKey:
+          "BBN_wOv4FUfbUGbsau251mWz050ZDyUe73CD_EFgN9kFEA4uUl-aIdTGQrbud9HXIeJ4k20pj7KCW9CW2r-WD8M",
+      });
 
-//       const resp = await axios.post(
-//         `${import.meta.env.VITE_BASE_URL}/pushNotification/postToken`,
-//         {
-//           userId,
-//           token,
-//         }
-//       );
-//       console.log("Post Token Response:", resp.data);
-//       dispatch(setAuthUser(resp?.data?.data?.updatedUser));
-//     } catch (error) {
-//       console.error(
-//         "Error Posting FCM TOKEN",
-//         error.response ? error.response.data : error.message
-//       );
-//     }
-//   } else {
-//     console.log("Notification permission denied.");
-//     alert(
-//       "You have denied notification permissions. Please enable them in your browser settings to receive updates."
-//     );
-//   }
-// };
+      console.log("Generated Token:", token);
+
+      const resp = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/pushNotification/postToken`,
+        {
+          userId,
+          token,
+        }
+      );
+      console.log("Post Token Response:", resp.data);
+      dispatch(setAuthUser(resp?.data?.data?.updatedUser));
+    } catch (error) {
+      console.error(
+        "Error Posting FCM TOKEN",
+        error.response ? error.response.data : error.message
+      );
+    }
+  } else {
+    console.log("Notification permission denied.");
+    alert(
+      "You have denied notification permissions. Please enable them in your browser settings to receive updates."
+    );
+  }
+};

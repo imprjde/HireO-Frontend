@@ -16,7 +16,6 @@ export function ProfilePopover({ setShowModal }) {
   const [open, setOpen] = useState(false);
 
   const { authUser } = useSelector((store) => store.auth);
-  console.log("authUser:", authUser);
 
   return (
     <Popover open={open}>
