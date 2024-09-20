@@ -25,7 +25,8 @@ messaging.onBackgroundMessage((payload) => {
   const notificationTitle = payload.notification.title;
   const notificationOptions = {
     body: payload.notification.body,
-    icon: "https://res.cloudinary.com/imprjde/image/upload/v1722672813/tsaosuood2dsnm9bhigy.png",
+    // icon: "https://res.cloudinary.com/imprjde/image/upload/v1722672813/tsaosuood2dsnm9bhigy.png",
+    icon: "https://res.cloudinary.com/imprjde/image/upload/c_thumb,w_200,g_face/v1726844699/notify-dp-removebg_zr0zwh.png",
   };
 
   self.registration.showNotification(notificationTitle, notificationOptions);
