@@ -134,6 +134,7 @@ import axios from "axios";
 import { messaging } from "../firebase/firebase";
 import { getToken } from "firebase/messaging";
 import { setAuthUser } from "@/redux/authSlice";
+import { toast } from "sonner";
 
 export const reqNotifyPermission = async (userId, dispatch) => {
   let permission = await Notification.requestPermission();
@@ -165,8 +166,10 @@ export const reqNotifyPermission = async (userId, dispatch) => {
         }
       );
       console.log("Post Token Response:", resp.data);
+      toast.info("FCM Token Posted");
       dispatch(setAuthUser(resp?.data?.data?.updatedUser));
     } catch (error) {
+      toast.error("Error Posting FCM");
       console.error(
         "Error Posting FCM TOKEN",
         error.response ? error.response.data : error.message
