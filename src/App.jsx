@@ -216,7 +216,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // import { useEffect } from "react";
 import { reqNotifyPermission } from "./helpers/reqNotifyPermission";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import DeniedInfo from "./components/DeniedInfo";
+import { AnimatePresence } from "framer-motion";
 
 const appRouter = createBrowserRouter([
   {
@@ -325,6 +327,7 @@ const appRouter = createBrowserRouter([
 ]);
 
 function App() {
+  const [showModal, setShowModal] = useState(false);
   const { authUser } = useSelector((store) => store.auth);
 
   const dispatch = useDispatch();
@@ -338,7 +341,7 @@ function App() {
       //  &&     !authUser?.isFcmPosted
     ) {
       console.warn("UseEffect for Permission Running");
-      reqNotifyPermission(authUser?._id, dispatch);
+      reqNotifyPermission(authUser?._id, dispatch, setShowModal);
     } else {
       console.error("reqNotifyPermission Won't run");
     }
@@ -349,6 +352,9 @@ function App() {
 
   return (
     <div className="bg-gradient-to-b min-h-screen bg-black">
+      <AnimatePresence>
+        {showModal && <DeniedInfo setShowModal={setShowModal} />}
+      </AnimatePresence>
       <QueryClientProvider client={queryClient}>
         <motion.div
           initial={{ opacity: 0 }}
