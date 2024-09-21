@@ -2,10 +2,8 @@ import Navbar from "./shared/Navbar";
 import { useSelector } from "react-redux";
 import Job from "./Job";
 import { motion } from "framer-motion";
-// import useGetAllJobs from "@/hooks/useGetAllJobs";
 
 const Browse = () => {
-  // useGetAllJobs();
   const { searchedJobs, searchText } = useSelector((store) => store.job);
 
   return (

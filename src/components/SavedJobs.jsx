@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setSavedJobs } from "@/redux/jobSlice";
-// import { setIsFetchingSavedJobs } from "@/redux/jobSlice";
 import UpdateLoader from "./loaders/UpdateLoader";
 import { toast } from "sonner";
 import SavedJobsLoader from "./loaders/SavedJobsLoader";
@@ -17,38 +16,11 @@ import { useQuery } from "@tanstack/react-query";
 export default function SavedJobs() {
   useTokenExpirationCheck();
   const { authUser } = useSelector((store) => store.auth);
-  // const { savedJobs, isFetchingSavedJobs } = useSelector((store) => store.job);
   const [isRemoving, setIsRemoving] = useState(false);
-  // console.log(savedJobs);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   const fetchSavedJobs = async () => {
-  //     if (!authUser) {
-  //       toast.info("Please Login to access your saved Jobs");
-  //       return;
-  //     }
-  //     try {
-  //       dispatch(setIsFetchingSavedJobs(true));
-  //       const res = await axios.get(
-  //         `${import.meta.env.VITE_BASE_URL}/saved/getSavedJobs?created_by=${
-  //           authUser?._id
-  //         }`
-  //       );
-  //       dispatch(setSavedJobs(res.data.savedJobs));
-  //       dispatch(setIsFetchingSavedJobs(false));
-  //     } catch (error) {
-  //       toast.error(error?.message);
-  //       dispatch(setIsFetchingSavedJobs(false));
-  //       console.log(error);
-  //     }
-  //   };
-  //   fetchSavedJobs();
-  // }, [authUser, authUser?._id, dispatch]);
-
   const fetchSavedJobs = async (userId) => {
-    console.log("FETCH SAVED JOB API RUNNING");
     try {
       const res = await axios.get(
         `${

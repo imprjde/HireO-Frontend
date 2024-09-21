@@ -17,8 +17,6 @@ export const app = initializeApp(firebaseConfig);
 export const messaging = getMessaging(app);
 
 // Handle incoming messages when the app is in the foreground
-onMessage(messaging, (payload) => {
-  console.log("Message received. ", payload);
+onMessage(messaging, () => {
   toast.info("New Notification Received");
-  // Optionally show a notification or update UI
 });

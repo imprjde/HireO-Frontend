@@ -15,7 +15,6 @@ const notificationSlice = createSlice({
       state.allNotifications = action.payload;
     },
     setUnseenNotificationCount: (state, action) => {
-      // console.log("setUnseenNotificationCount payload=", action.payload);
       state.unseenNotificationCount = action.payload;
     },
     setIsFetchingNotifications: (state, action) => {

@@ -33,8 +33,6 @@ const Jobs = () => {
   const [viewFiltersTwo, setViewFiltersTwo] = useState(false);
   const [hasAnimated, setHAsAnimated] = useState(false);
 
-  console.log("HAS ANIMATED::", hasAnimated);
-
   const { authUser } = useSelector((store) => store.auth);
 
   const navigate = useNavigate();
@@ -49,7 +47,6 @@ const Jobs = () => {
 
   const fetchJobs = async ({ queryKey }) => {
     setHAsAnimated(true);
-    console.log("fetchJobs...}");
     const filterObject = queryKey[1];
     const query = new URLSearchParams({
       location: filterObject.location.join(","),
@@ -79,7 +76,6 @@ const Jobs = () => {
           }/update-onboard`,
           { withCredentials: true }
         );
-        console.log(response?.data?.user);
         dispatch(setAuthUser(response?.data?.user));
       } else {
         localStorage.setItem("hasOnboarded", true);

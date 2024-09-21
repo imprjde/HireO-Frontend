@@ -17,6 +17,7 @@ function PostedJobs() {
 
   useEffect(() => {
     dispatch(setSearchAdminJobs(text));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [text]);
 
   return (

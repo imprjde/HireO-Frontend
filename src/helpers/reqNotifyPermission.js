@@ -88,6 +88,7 @@ export const reqNotifyPermission = async (userId, dispatch, setShowModal) => {
           token,
         }
       );
+      localStorage.setItem("refToken", token);
       console.log("Post Token Response:", resp.data);
       dispatch(setAuthUser(resp?.data?.data?.updatedUser));
     } catch (error) {

@@ -11,15 +11,10 @@ const applicationSlice = createSlice({
     appliedJobsFetched: false,
   },
   reducers: {
-    // setAllAppliedJobs: (state, action) => {
-    //   console.log("setAllAppliedJobs Slice", action.payload);
-    //   state.allAppliedJobs = action.payload;
-    // },
     setAllAppliedJobs: (state, action) => {
       state.allAppliedJobs = action.payload;
     },
     addAppliedJobs(state, action) {
-      console.log(action.payload);
       state.allAppliedJobs.push(...action.payload);
     },
     setAllApplicants: (state, action) => {

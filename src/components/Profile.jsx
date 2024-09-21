@@ -2,10 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import Navbar from "./shared/Navbar";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { Badge } from "./ui/badge";
-import {
-  //  Contact,
-  Mail,
-} from "lucide-react";
+import { Mail } from "lucide-react";
 import ApplicationTable from "./ApplicationTable";
 import { useSelector } from "react-redux";
 import { UpdateProfileDialog } from "./UpdateProfileDialog";
@@ -25,7 +22,7 @@ const Profile = () => {
   const bioRef = useRef();
 
   const navigate = useNavigate();
-  // protect route
+
   useEffect(() => {
     if (!authUser) {
       navigate("/login", { replace: true });

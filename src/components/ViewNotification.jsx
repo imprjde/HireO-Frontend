@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 export default function ViewNotification() {
   const { notificationDetails } = useSelector((state) => state.notification);
 
-  console.log("INFO FROM VIEWPAGE=", notificationDetails);
   const renderPage = () => {
     return notificationDetails?.type === "accept" ? (
       <div className="flex justify-center mx-4 md:mx-0 items-center min-h-screen bg-black">
