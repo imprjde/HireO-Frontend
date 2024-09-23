@@ -30,23 +30,6 @@ const Home = () => {
     }
   }, [authUser, navigate]);
 
-  const handleFullscreen = () => {
-    const elem = document.documentElement; // This refers to the entire document, which will be displayed in fullscreen
-
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.mozRequestFullScreen) {
-      // Firefox
-      elem.mozRequestFullScreen();
-    } else if (elem.webkitRequestFullscreen) {
-      // Chrome, Safari, and Opera
-      elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) {
-      // IE/Edge
-      elem.msRequestFullscreen();
-    }
-  };
-
   return (
     <div>
       <AnimatePresence>
@@ -55,7 +38,6 @@ const Home = () => {
         ) : (
           <>
             <Navbar />
-            <button onClick={handleFullscreen} className="bg-red-500">Enter Fullscreen</button>
             <motion.div>
               <LoadingBar color="#FFFFFF" height={4} progress={progress} />
               <HeroSection setProgress={setProgress} />
