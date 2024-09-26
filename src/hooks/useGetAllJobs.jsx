@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setAllJobs, addJobs } from "@/redux/jobSlice";
 
 const fetchJobs = async ({ pageParam = 1 }) => {
@@ -13,10 +13,10 @@ const fetchJobs = async ({ pageParam = 1 }) => {
 
 const useGetAllJobs = () => {
   const dispatch = useDispatch();
-  const { searchText } = useSelector((store) => store.job);
+  // const { searchText } = useSelector((store) => store.job);
 
   const query = useInfiniteQuery({
-    queryKey: ["jobs", searchText],
+    queryKey: ["jobs"],
     queryFn: fetchJobs,
     cacheTime: Infinity,
     staleTime: Infinity,

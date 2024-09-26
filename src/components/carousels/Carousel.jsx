@@ -5,15 +5,6 @@ import "slick-carousel/slick/slick-theme.css";
 import CarouselItem from "./CarouselItem";
 import "./Carousel.css";
 
-// const categories = [
-//   "Frontend Developer",
-//   "Backend Developer",
-//   "Data scientist",
-//   "Graphic Designer",
-//   "UI/UX Designer",
-//   "Data Engineer",
-//   "Devops Engineer",
-// ];
 const categories = [
   "Frontend Developer",
   "Backend Developer",
@@ -22,7 +13,6 @@ const categories = [
   "DevOps Engineer",
   "UI/UX Designer",
   "Mobile App Developer",
-  // "Machine Learning Engineer",
   "Cloud Engineer",
 ];
 

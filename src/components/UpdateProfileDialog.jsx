@@ -220,7 +220,9 @@ export function UpdateProfileDialog({ open, setOpen, bioRef }) {
               </Label>
               <Input
                 id="number"
-                type="string"
+                type="tel"
+                maxLength="10"
+                minLength="10"
                 value={input.phoneNumber}
                 name="phoneNumber"
                 onChange={changeHandler}

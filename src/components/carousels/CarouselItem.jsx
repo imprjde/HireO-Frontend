@@ -1,7 +1,7 @@
 import {
   setIsSearching,
   setSearchedJobs,
-  setSearchText,
+  // setSearchText,
 } from "@/redux/jobSlice";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -14,7 +14,7 @@ export default function CarouselItem({ category, setProgress }) {
   const handleCarouselSearch = async (category) => {
     try {
       setProgress(50);
-      dispatch(setSearchText(category));
+      // dispatch(setSearchText(category));
       dispatch(setIsSearching(true));
       let res = await axios.get(
         `${
